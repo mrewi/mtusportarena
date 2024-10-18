@@ -83,7 +83,7 @@ const Navbar = () => {
               Table Tennis
             </Button>
             <Button component={Link} to="/standings" sx={{ fontFamily:'Roberto Mono, Monospace',backgroundColor: 'green', color: 'white' }}>
-              Long Tennis
+              Lawn Tennis
             </Button>
             {/* <Button component={Link} to="/stats" sx={{ backgroundColor: 'green', color: 'white' }}>
               Stats

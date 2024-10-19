@@ -1,6 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
-import { AppBar, Toolbar, Box, Button, CardMedia } from '@mui/material';
+import { AppBar, Toolbar, Box, Button, CardMedia, Typography, IconButton } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link } from 'react-router-dom';
 import AbialaBucksLogo from '../Clubs/AbialaBucks/bucks.png'
 import AdeshinaHawksLogo from '../Clubs/AdeshinaHawks/hawks.png'
@@ -22,24 +23,39 @@ const teams = [
 const Navbar = () => {
   return (
     <div>
+      <AppBar position="static" sx={{ backgroundColor: 'grey', position: 'relative' }}>
+        <Toolbar sx={{ justifyContent: 'center', position: 'relative' }}>
+          {/* Centered Logo and Title */}
+          <Box sx={{ display: 'flex', alignItems: 'center', position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
+            <CardMedia
+              component="img"
+              sx={{
+                width: 50,
+                height: 50,
+                objectFit: 'contain',
+                marginRight: '1rem',
+              }}
+              image={MBLLogo}
+              alt="App logo"
+            />
+            <Typography sx={{ color: 'white', fontFamily: 'Roberto Mono, Monospace', fontSize: '35px' }}>
+              MTU BASKETBALL LEAGUE
+            </Typography>
+          </Box>
+
+          {/* Admin Button on the Far Right */}
+          <Box sx={{ position: 'absolute', right: 0 }}>
+            <Button component={Link} to="/mbl/admin-auth" sx={{ fontFamily: 'Roberto Mono, Monospace', backgroundColor: 'grey', color: 'white', fontSize: '20px' }}>
+              ADMIN
+            </Button>
+          </Box>
+        </Toolbar>
+      </AppBar>
+
+
       {/* Main AppBar with logo and team logos */}
       <AppBar position="static" sx={{ backgroundColor: 'black' }}>
         <Toolbar sx={{ justifyContent: 'center' }}>
-          {/* App logo on the left side */}
-          <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
-            <CardMedia
-              component='img'
-              sx={{
-                width: 80, // Adjust the size of the app logo
-                height: 80,
-                objectFit: 'contain',
-                display: 'flex',
-                marginRight: '1rem' // Add margin to the right of the logo
-              }}
-              image={MBLLogo} // Fetch the app logo from the local directory
-              alt="App logo"
-            />
-          </Box>
           {/* Center the team logos */}
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 2 }}>
             {teams.map((team) => (
@@ -66,6 +82,9 @@ const Navbar = () => {
       {/* Navigation Bar */}
       <AppBar position="static" sx={{ backgroundColor: 'white' }}>
         <Toolbar sx={{ justifyContent: 'center' }}>
+        <IconButton component={Link} to="/" sx={{ color: 'black' }}>
+          <ArrowBackIcon />
+        </IconButton>
           <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
             <Button component={Link} to="/mbl/home" sx={{ fontFamily:'Roberto Mono, Monospace',backgroundColor: 'black', color: 'white' }}>
               Home

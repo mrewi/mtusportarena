@@ -23,6 +23,9 @@ import MBLTransfers from './pages/MBL/Transfers/MBLTransfers'
 import MLSClubs from './pages/MLS/Club/MLSClubs'
 import MBLClubs from './pages/MBL/Clubs/MBLClubs'
 import MLSAdminSignin from './pages/MLS/Admin/MLSAdminSignin'
+import MBLAdminSignin from './pages/MBL/Admin/MBLAdminSignin'
+import MBLAdminDashboard from './pages/MBL/Admin/MBLAdminDashboard'
+import ProtectedRoute from './pages/MBL//Admin/MBLProctectedRoute'
 
 // import Navbar from './components/Navbar/Navbar'
 
@@ -66,7 +69,18 @@ const App = () => {
 
           {/* admin auth */}
           <Route path="/admin-auth" element={<MLSAdminSignin />} />
+          <Route path="/mbl/admin-auth" element={<MBLAdminSignin />} />
 
+          {/* admin dashboard */}
+           {/* Protected Route for admin dashboard */}
+            <Route
+              path="/mbl/admin-dashboard"
+              element={
+                <ProtectedRoute>
+                  <MBLAdminDashboard />
+                </ProtectedRoute>
+              }
+            />
 
           
           {/* <Route path="/sign-in" element={<SignIn />} /> */}

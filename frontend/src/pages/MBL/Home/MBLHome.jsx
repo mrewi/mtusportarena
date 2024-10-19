@@ -15,7 +15,7 @@ const Home = () => {
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: '#f5f5f5', // Light background color
+          // backgroundColor: '#f5f5f5', // Light background color
           textAlign: 'center',
         }}
       >

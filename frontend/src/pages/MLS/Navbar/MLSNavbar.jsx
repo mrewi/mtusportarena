@@ -1,6 +1,8 @@
 // eslint-disable-next-line no-unused-vars
 import React from 'react';
-import { AppBar, Toolbar, Box, Button, CardMedia } from '@mui/material';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { AppBar, Toolbar, Box, Button, CardMedia, Typography,IconButton    } from '@mui/material';
+// import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link } from 'react-router-dom';
 import AbialaGiantsLogo from '../../MLS/Club/AbialaGiants/ABIALA_GIANT-removebg-preview.png'
 import AdeshinaFcLogo from '../Club/AdeshinaFc/Adesina_FC-removebg-preview.png'
@@ -11,7 +13,6 @@ import OlukoyaStarsLogo from '../Club/OlukoyaStars/OLUKOYA_STARS-removebg-previe
 import OlurinUnitedLogo from '../Club/OlurinUnited/OLURIN_UNITED-removebg-preview.png'
 import YoungStarsLogo from '../Club/YoungStars/YOUNG_STARS-removebg-preview.png'
 import MTUSportArenaLogo from '../../../assets/MTU_MMINI_LEAGUE_LOGO-removebg-preview.png'
-// import MTUSportArenaLogo from '../../../../public/MTU_MMINI_LEAGUE_LOGO-removebg-preview.png'
 
 
 // Sample team data, now fetching logos from the local directory
@@ -29,11 +30,9 @@ const teams = [
 const Navbar = () => {
   return (
     <div>
-      {/* Main AppBar with logo and team logos */}
-      <AppBar position="static" sx={{ backgroundColor: 'purple' }}>
-        <Toolbar sx={{ justifyContent: 'center' }}>
-          {/* App logo on the left side */}
-          <Box sx={{ display: 'flex', justifyContent: 'flex-start', alignItems: 'center' }}>
+      <AppBar position="static" sx={{ backgroundColor: 'BLACK', position:'relative' }}>
+        <Toolbar sx={{ justifyContent: 'center', position:'relative' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
             <CardMedia
               component="img"
               sx={{
@@ -46,7 +45,23 @@ const Navbar = () => {
               image={MTUSportArenaLogo} // Fetch the app logo from the local directory
               alt="App logo"
             />
+            <Typography sx={{ color: 'white', fontFamily: 'Roberto Mono, Monospace', fontSize: '35px' }}>
+
+          {/* <Typography sx={{color:'white', fontFamily:'Roberto Mono, Monospace', fontSize:'35px'}}> */}
+              MTU LEAGUE SOCCER
+            </Typography>
           </Box>
+          {/* Admin Button on the Far Right */}
+          <Box sx={{ position: 'absolute', right: 0 }}>
+            <Button component={Link} to="/mls/admin-auth" sx={{ fontFamily: 'Roberto Mono, Monospace', backgroundColor: 'black', color: 'white', fontSize: '20px' }}>
+              ADMIN
+            </Button>
+          </Box>
+        </Toolbar>
+      </AppBar>
+      {/* Main AppBar with logo and team logos */}
+      <AppBar position="static" sx={{ backgroundColor: 'purple' }}>
+        <Toolbar sx={{ justifyContent: 'center' }}>
           {/* Center the team logos */}
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 2 }}>
             {teams.map((team) => (
@@ -73,7 +88,13 @@ const Navbar = () => {
       {/* Navigation Bar */}
       <AppBar position="static" sx={{ backgroundColor: 'white' }}>
         <Toolbar sx={{ justifyContent: 'center' }}>
+        <IconButton component={Link} to="/" sx={{ color: 'black' }}>
+          <ArrowBackIcon />
+        </IconButton>
           <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
+            {/* <Button component={Link} to="/" sx={{ fontFamily:'Roberto Mono, Monospace',backgroundColor: 'grey', color: 'white' }}>
+              BACK
+            </Button> */}
             <Button component={Link} to="/mls/home" sx={{ backgroundColor: 'purple', color: 'white' }}>
               Home
             </Button>

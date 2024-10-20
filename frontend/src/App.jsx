@@ -25,6 +25,8 @@ import MBLClubs from './pages/MBL/Clubs/MBLClubs'
 import MLSAdminSignin from './pages/MLS/Admin/MLSAdminSignin'
 import MBLAdminSignin from './pages/MBL/Admin/MBLAdminSignin'
 import MBLAdminDashboard from './pages/MBL/Admin/MBLAdminDashboard'
+import PlayersManagement from './pages/MBL/Admin/Management/PlayersManagement'
+import FixturesManagement from './pages/MBL/Admin/Management/FixturesManagement'
 import ProtectedRoute from './pages/MBL//Admin/MBLProctectedRoute'
 
 // import Navbar from './components/Navbar/Navbar'
@@ -73,14 +75,66 @@ const App = () => {
 
           {/* admin dashboard */}
            {/* Protected Route for admin dashboard */}
-            <Route
-              path="/mbl/admin-dashboard"
-              element={
+            <Route path="/mbl/admin-dashboard" element={
                 <ProtectedRoute>
                   <MBLAdminDashboard />
                 </ProtectedRoute>
               }
             />
+            <Route path="/mbl/admin-dashboard/players" element={
+                <ProtectedRoute>
+                  <PlayersManagement />
+                </ProtectedRoute>
+              }
+            />
+             <Route path="/mbl/admin-dashboard/fixtures" element={
+                <ProtectedRoute>
+                  <FixturesManagement />
+                </ProtectedRoute>
+              }
+            />
+            {/*<Route path="/mbl/admin-dashboard" element={
+                <ProtectedRoute>
+                  <MBLAdminDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/mbl/admin-dashboard" element={
+                <ProtectedRoute>
+                  <MBLAdminDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/mbl/admin-dashboard" element={
+                <ProtectedRoute>
+                  <MBLAdminDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/mbl/admin-dashboard" element={
+                <ProtectedRoute>
+                  <MBLAdminDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/mbl/admin-dashboard" element={
+                <ProtectedRoute>
+                  <MBLAdminDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/mbl/admin-dashboard" element={
+                <ProtectedRoute>
+                  <MBLAdminDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/mbl/admin-dashboard" element={
+                <ProtectedRoute>
+                  <MBLAdminDashboard />
+                </ProtectedRoute>
+              }
+            /> */}
 
           
           {/* <Route path="/sign-in" element={<SignIn />} /> */}

@@ -5,13 +5,13 @@ import { AppBar, Toolbar, Box, Button, CardMedia, Typography,IconButton    } fro
 // import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link } from 'react-router-dom';
 import AbialaGiantsLogo from '../../MLS/Club/AbialaGiants/ABIALA_GIANT-removebg-preview.png'
-import AdeshinaFcLogo from '../Club/AdeshinaFc/Adesina_FC-removebg-preview.png'
-import AyolabiFcLogo from '../Club/AyolabiFc/AYOLABI_FC-removebg-preview.png'
+import AdeshinaFcLogo from '../Club/AdeshinaFc/AdeshinaFc.png'
+import AyolabiFcLogo from '../Club/AyolabiFc/AyolabiFc.png'
 import GbenroBallersLogo from '../Club/GbenroBallers/GBENRO_BALLARZ-removebg-preview.png'
-import OjoEaglesLogo from '../Club/OjoEagles/OJO_EAGLES-removebg-preview.png'
+import OjoEaglesLogo from '../Club/OjoEagles/OjoEagles.png'
 import OlukoyaStarsLogo from '../Club/OlukoyaStars/OLUKOYA_STARS-removebg-preview.png'
 import OlurinUnitedLogo from '../Club/OlurinUnited/OLURIN_UNITED-removebg-preview.png'
-import YoungStarsLogo from '../Club/YoungStars/YOUNG_STARS-removebg-preview.png'
+import YoungStarsLogo from '../Club/YoungStars/YoungStars.png'
 import MTUSportArenaLogo from '../../../assets/MTU_MMINI_LEAGUE_LOGO-removebg-preview.png'
 
 

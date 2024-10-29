@@ -25,9 +25,13 @@ import MBLClubs from './pages/MBL/Clubs/MBLClubs'
 import MLSAdminSignin from './pages/MLS/Admin/MLSAdminSignin'
 import MBLAdminSignin from './pages/MBL/Admin/MBLAdminSignin'
 import MBLAdminDashboard from './pages/MBL/Admin/MBLAdminDashboard'
+import MLSAdminDashboard from './pages/MLS/Admin/MLSAdminDashboard'
 import PlayersManagement from './pages/MBL/Admin/Management/PlayersManagement'
+import MLSPlayersManagement from './pages/MLS/Admin/Management/MLSPlayersManagement'
 import FixturesManagement from './pages/MBL/Admin/Management/FixturesManagement'
-import ProtectedRoute from './pages/MBL//Admin/MBLProctectedRoute'
+import MLSFixturesManagement from './pages/MLS/Admin/Management/MLSFixturesManagement'
+import MBLProtectedRoute from './pages/MBL//Admin/MBLProctectedRoute'
+import MLSProtectedRoute from './pages/MLS/Admin/MLSProtectedRoute'
 
 // import Navbar from './components/Navbar/Navbar'
 
@@ -72,25 +76,44 @@ const App = () => {
           {/* admin auth */}
           <Route path="/admin-auth" element={<MLSAdminSignin />} />
           <Route path="/mbl/admin-auth" element={<MBLAdminSignin />} />
+          <Route path="/mls/admin-auth" element={<MLSAdminSignin />} />
 
           {/* admin dashboard */}
            {/* Protected Route for admin dashboard */}
             <Route path="/mbl/admin-dashboard" element={
-                <ProtectedRoute>
+                <MBLProtectedRoute>
                   <MBLAdminDashboard />
-                </ProtectedRoute>
+                </MBLProtectedRoute>
+              }
+            />
+            <Route path="/mls/admin-dashboard" element={
+                <MLSProtectedRoute>
+                  <MLSAdminDashboard />
+                </MLSProtectedRoute>
               }
             />
             <Route path="/mbl/admin-dashboard/players" element={
-                <ProtectedRoute>
+                <MBLProtectedRoute>
                   <PlayersManagement />
-                </ProtectedRoute>
+                </MBLProtectedRoute>
+              }
+            />
+            <Route path="/mls/admin-dashboard/players" element={
+                <MLSProtectedRoute>
+                  <MLSPlayersManagement />
+                </MLSProtectedRoute>
               }
             />
              <Route path="/mbl/admin-dashboard/fixtures" element={
-                <ProtectedRoute>
+                <MBLProtectedRoute>
                   <FixturesManagement />
-                </ProtectedRoute>
+                </MBLProtectedRoute>
+              }
+            />
+             <Route path="/mls/admin-dashboard/fixtures" element={
+                <MLSProtectedRoute>
+                  <MLSFixturesManagement />
+                </MLSProtectedRoute>
               }
             />
             {/*<Route path="/mbl/admin-dashboard" element={

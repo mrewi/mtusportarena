@@ -76,13 +76,13 @@ const Navbar = () => {
             <Button component={Link} to="/mbl/home" sx={{ fontFamily:'Roberto Mono, Monospace',backgroundColor: 'green', color: 'white' }}>
               Basketball
             </Button>
-            <Button component={Link} to="/mvl/home" sx={{ fontFamily:'Roberto Mono, Monospace',backgroundColor: 'green', color: 'white' }}>
+            <Button component={Link} to="/" sx={{ fontFamily:'Roberto Mono, Monospace',backgroundColor: 'green', color: 'white' }}>
               VolleyBall
             </Button>
-            <Button component={Link} to="/results" sx={{ fontFamily:'Roberto Mono, Monospace',backgroundColor: 'green', color: 'white' }}>
+            <Button component={Link} to="/" sx={{ fontFamily:'Roberto Mono, Monospace',backgroundColor: 'green', color: 'white' }}>
               Table Tennis
             </Button>
-            <Button component={Link} to="/standings" sx={{ fontFamily:'Roberto Mono, Monospace',backgroundColor: 'green', color: 'white' }}>
+            <Button component={Link} to="/" sx={{ fontFamily:'Roberto Mono, Monospace',backgroundColor: 'green', color: 'white' }}>
               Lawn Tennis
             </Button>
             {/* <Button component={Link} to="/stats" sx={{ backgroundColor: 'green', color: 'white' }}>

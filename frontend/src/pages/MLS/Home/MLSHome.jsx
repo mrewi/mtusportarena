@@ -23,12 +23,12 @@ const Home = () => {
         <WarningAmberIcon sx={{ fontSize: 100, color: 'orange', mb: 3 }} />
 
         {/* Coming Soon Text */}
-        <Typography variant="h3" sx={{ fontWeight: 'bold', mb: 2 }}>
+        <Typography variant="h3" sx={{ fontFamily: 'Roberto Mono, Monospace',fontWeight: 'bold', mb: 2 }}>
           Coming Soon!
         </Typography>
 
         {/* Subtext */}
-        <Typography variant="h6" sx={{ mb: 4 }}>
+        <Typography variant="h6" sx={{fontFamily: 'Roberto Mono, Monospace', mb: 4 }}>
           We’re working hard to bring something amazing. Stay tuned!
         </Typography>
 

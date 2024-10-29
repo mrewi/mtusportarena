@@ -4,13 +4,13 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { AppBar, Toolbar, Box, Button, CardMedia, Typography,IconButton    } from '@mui/material';
 // import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link } from 'react-router-dom';
-import AbialaGiantsLogo from '../../MLS/Club/AbialaGiants/ABIALA_GIANT-removebg-preview.png'
+import AbialaGiantsLogo from '../../MLS/Club/AbialaGiants/AbialaGiants.png'
 import AdeshinaFcLogo from '../Club/AdeshinaFc/AdeshinaFc.png'
 import AyolabiFcLogo from '../Club/AyolabiFc/AyolabiFc.png'
-import GbenroBallersLogo from '../Club/GbenroBallers/GBENRO_BALLARZ-removebg-preview.png'
+import GbenroBallersLogo from '../Club/GbenroBallers/GbenroBallers.png'
 import OjoEaglesLogo from '../Club/OjoEagles/OjoEagles.png'
-import OlukoyaStarsLogo from '../Club/OlukoyaStars/OLUKOYA_STARS-removebg-preview.png'
-import OlurinUnitedLogo from '../Club/OlurinUnited/OLURIN_UNITED-removebg-preview.png'
+import OlukoyaStarsLogo from '../Club/OlukoyaStars/OlukoyaStars.png'
+import OlurinUnitedLogo from '../Club/OlurinUnited/OlurinUnited.png'
 import YoungStarsLogo from '../Club/YoungStars/YoungStars.png'
 import MTUSportArenaLogo from '../../../assets/MTU_MMINI_LEAGUE_LOGO-removebg-preview.png'
 
@@ -95,31 +95,31 @@ const Navbar = () => {
             {/* <Button component={Link} to="/" sx={{ fontFamily:'Roberto Mono, Monospace',backgroundColor: 'grey', color: 'white' }}>
               BACK
             </Button> */}
-            <Button component={Link} to="/mls/home" sx={{ backgroundColor: 'purple', color: 'white' }}>
+            <Button component={Link} to="/mls/home" sx={{fontFamily: 'Roberto Mono, Monospace', backgroundColor: 'purple', color: 'white' }}>
               Home
             </Button>
-            <Button component={Link} to="/mls/players" sx={{ backgroundColor: 'purple', color: 'white' }}>
+            <Button component={Link} to="/mls/players" sx={{fontFamily: 'Roberto Mono, Monospace', backgroundColor: 'purple', color: 'white' }}>
               Players
             </Button>
-            <Button component={Link} to="/mls/matches" sx={{ backgroundColor: 'purple', color: 'white' }}>
+            <Button component={Link} to="/mls/matches" sx={{fontFamily: 'Roberto Mono, Monospace', backgroundColor: 'purple', color: 'white' }}>
               Fixtures
             </Button>
-            <Button component={Link} to="/mls/results" sx={{ backgroundColor: 'purple', color: 'white' }}>
+            <Button component={Link} to="/mls/results" sx={{fontFamily: 'Roberto Mono, Monospace', backgroundColor: 'purple', color: 'white' }}>
               Results
             </Button>
-            <Button component={Link} to="/mls/standings" sx={{ backgroundColor: 'purple', color: 'white' }}>
+            <Button component={Link} to="/mls/standings" sx={{fontFamily: 'Roberto Mono, Monospace', backgroundColor: 'purple', color: 'white' }}>
               Standings
             </Button>
-            <Button component={Link} to="/mls/stats" sx={{ backgroundColor: 'purple', color: 'white' }}>
+            <Button component={Link} to="/mls/stats" sx={{fontFamily: 'Roberto Mono, Monospace', backgroundColor: 'purple', color: 'white' }}>
               Stats
             </Button>
-            <Button component={Link} to="/mls/transfers" sx={{ backgroundColor: 'purple', color: 'white' }}>
+            <Button component={Link} to="/mls/transfers" sx={{fontFamily: 'Roberto Mono, Monospace', backgroundColor: 'purple', color: 'white' }}>
               Transfers
             </Button>
-            <Button component={Link} to="/mls/news" sx={{ backgroundColor: 'purple', color: 'white' }}>
+            <Button component={Link} to="/mls/news" sx={{fontFamily: 'Roberto Mono, Monospace', backgroundColor: 'purple', color: 'white' }}>
               News
             </Button>
-            <Button component={Link} to="/mls/clubs" sx={{ backgroundColor: 'purple', color: 'white' }}>
+            <Button component={Link} to="/mls/clubs" sx={{fontFamily: 'Roberto Mono, Monospace', backgroundColor: 'purple', color: 'white' }}>
               Clubs
             </Button>
           </Box>

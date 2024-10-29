@@ -5,13 +5,13 @@ import { Grid, Card, CardContent, CardMedia, Typography, } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
 // Import local team logos
-import AbialaGiantsLogo from '../../MLS/Club/AbialaGiants/ABIALA_GIANT-removebg-preview.png'
+import AbialaGiantsLogo from '../../MLS/Club/AbialaGiants/AbialaGiants.png'
 import AdeshinaFcLogo from '../Club/AdeshinaFc/AdeshinaFc.png'
 import AyolabiFcLogo from '../Club/AyolabiFc/AyolabiFc.png'
-import GbenroBallersLogo from '../Club/GbenroBallers/GBENRO_BALLARZ-removebg-preview.png'
+import GbenroBallersLogo from '../Club/GbenroBallers/GbenroBallers.png'
 import OjoEaglesLogo from '../Club/OjoEagles/OjoEagles.png'
-import OlukoyaStarsLogo from '../Club/OlukoyaStars/OLUKOYA_STARS-removebg-preview.png'
-import OlurinUnitedLogo from '../Club/OlurinUnited/OLURIN_UNITED-removebg-preview.png'
+import OlukoyaStarsLogo from '../Club/OlukoyaStars/OlukoyaStars.png'
+import OlurinUnitedLogo from '../Club/OlurinUnited/OlurinUnited.png'
 import YoungStarsLogo from '../Club/YoungStars/YoungStars.png'
 
 // Sample team data with local logos

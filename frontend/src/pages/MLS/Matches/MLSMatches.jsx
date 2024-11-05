@@ -104,40 +104,70 @@ const Fixtures = () => {
       </Box>
 
       {/* Modal for Fixture Details */}
-      {selectedFixture && (
-        <Modal open={openModal} onClose={handleCloseModal} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <Box sx={{ width: 500, bgcolor: 'background.paper', p: 4, boxShadow: 24, borderRadius: 2, fontFamily: 'Roboto Mono, monospace' }}>
-            <Typography variant="h5" gutterBottom>Match Details</Typography>
-            <Typography variant="body1" sx={{ mt: 2 }}>Teams: {selectedFixture.teamA} vs {selectedFixture.teamB}</Typography>
-            <Typography variant="body2" sx={{ mt: 1 }}>Stadium: {selectedFixture.stadium}</Typography>
-            <Typography variant="body2" sx={{ mt: 1 }}>Status: {selectedFixture.status}</Typography>
-            
-            <Typography variant="h6" sx={{ mt: 2 }}>Previous Meetings</Typography>
-            {/* Placeholder for previous meetings */}
-            <Typography variant="body2" sx={{ mt: 1 }}>- Add previous meeting details here.</Typography>
-            
-            <Typography variant="h6" sx={{ mt: 2 }}>Team Standings</Typography>
-            {/* Placeholder for standings */}
-            <Typography variant="body2" sx={{ mt: 1 }}>- Add standings details here.</Typography>
+{selectedFixture && (
+  <Modal open={openModal} onClose={handleCloseModal} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+    <Box
+      sx={{
+        width: 400,
+        bgcolor: 'background.paper',
+        p: 4,
+        boxShadow: 24,
+        borderRadius: 2,
+        fontFamily: 'Roboto Mono, monospace',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}
+    >
+      {/* Header with Match Info */}
+      <Typography variant="h6" sx={{ fontWeight: 'bold', mb: 3, textAlign: 'center', color: '#333' }}>
+        Match Details
+      </Typography>
+      
+      {/* Logos, Team Names, and Starting XI */}
+      <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4 }}>
+        <Box sx={{ textAlign: 'center' }}>
+          <CardMedia
+            component="img"
+            image={selectedFixture.teamALogo}
+            alt={`${selectedFixture.teamA} logo`}
+            sx={{ width: 80, height: 80, objectFit: 'contain' }}
+          />
+          <Typography variant="body1" sx={{ fontWeight: 'bold', mt: 1 }}>{selectedFixture.teamA}</Typography>
+          {/* Starting XI for Team A */}
+          <Typography variant="body2" sx={{ mt: 1 }}>Starting XI:</Typography>
+          {selectedFixture.teamAStartingXI?.map((player, index) => (
+            <Typography variant="body2" key={index}>{player}</Typography>
+          ))}
+        </Box>
 
-            <Typography variant="h6" sx={{ mt: 2 }}>Starting XI</Typography>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-              <Box>
-                <Typography variant="subtitle1">{selectedFixture.teamA}</Typography>
-                {/* Placeholder for Team A Starting XI */}
-                <Typography variant="body2">Player 1, Player 2, ...</Typography>
-              </Box>
-              <Box>
-                <Typography variant="subtitle1">{selectedFixture.teamB}</Typography>
-                {/* Placeholder for Team B Starting XI */}
-                <Typography variant="body2">Player 1, Player 2, ...</Typography>
-              </Box>
-            </Box>
+        <Typography variant="h6" sx={{ fontWeight: 'bold', mx: 2, color: '#888' }}>vs</Typography>
 
-            <Button onClick={handleCloseModal} sx={{ mt: 3, fontFamily: 'Roboto Mono, monospace' }}>Close</Button>
-          </Box>
-        </Modal>
-      )}
+        <Box sx={{ textAlign: 'center' }}>
+          <CardMedia
+            component="img"
+            image={selectedFixture.teamBLogo}
+            alt={`${selectedFixture.teamB} logo`}
+            sx={{ width: 80, height: 80, objectFit: 'contain' }}
+          />
+          <Typography variant="body1" sx={{ fontWeight: 'bold', mt: 1 }}>{selectedFixture.teamB}</Typography>
+          {/* Starting XI for Team B */}
+          <Typography variant="body2" sx={{ mt: 1 }}>Starting XI:</Typography>
+          {selectedFixture.teamBStartingXI?.map((player, index) => (
+            <Typography variant="body2" key={index}>{player}</Typography>
+          ))}
+        </Box>
+      </Box>
+
+      {/* Close Button */}
+      <Button onClick={handleCloseModal} sx={{ mt: 4, fontWeight: 'bold', color: '#1976d2', fontFamily: 'Roboto Mono, monospace' }}>
+        Close
+      </Button>
+    </Box>
+  </Modal>
+
+)}
     </div>
   );
 };

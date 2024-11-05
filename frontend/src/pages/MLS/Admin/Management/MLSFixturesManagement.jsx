@@ -16,7 +16,9 @@ const FixturesManagement = () => {
     teamBLogo: '',
     date: '',
     stadium: '',
-    status: ''
+    status: '',
+    teamAStartingXI: [''],
+    teamBStartingXI: ['']
   });
 
   const fetchFixtures = async () => {
@@ -37,16 +39,29 @@ const FixturesManagement = () => {
   }, []);
 
   const handleOpen = (fixture = null) => {
+    if (fixture) {
+      // Set newFixture to the selected fixture data, and convert the date to a string if necessary
+      setNewFixture({
+        ...fixture,
+        date: fixture.date.toDate().toISOString().slice(0, 16), // Format the date correctly for datetime-local input
+        teamAStartingXI: fixture.teamAStartingXI || [''],
+        teamBStartingXI: fixture.teamBStartingXI || [''],
+      });
+    } else {
+      // If no fixture is passed, reset newFixture to empty fields
+      setNewFixture({
+        teamA: '',
+        teamALogo: '',
+        teamB: '',
+        teamBLogo: '',
+        date: '',
+        stadium: '',
+        status: '',
+        teamAStartingXI: [''],
+        teamBStartingXI: ['']
+      });
+    }
     setSelectedFixture(fixture);
-    setNewFixture(fixture || {
-      teamA: '',
-      teamALogo: '',
-      teamB: '',
-      teamBLogo: '',
-      date: '',
-      stadium: '',
-      status: ''
-    });
     setOpen(true);
   };
 
@@ -57,6 +72,13 @@ const FixturesManagement = () => {
 
   const handleChange = (e) => {
     setNewFixture({ ...newFixture, [e.target.name]: e.target.value });
+  };
+
+  const handleAddStartingXI = (team, value) => {
+    setNewFixture((prevState) => ({
+      ...prevState,
+      [team]: value.split(',')
+    }));
   };
 
   const handleAddFixture = async () => {
@@ -200,6 +222,24 @@ const FixturesManagement = () => {
               name="status"
               value={newFixture.status}
               onChange={handleChange}
+              fullWidth
+              margin="normal"
+            />
+
+             {/* Starting XI Input */}
+             <TextField
+              label="Team A Starting XI (comma separated)"
+              name="teamAStartingXI"
+              value={newFixture.teamAStartingXI.join(', ')}
+              onChange={(e) => handleAddStartingXI('teamAStartingXI', e.target.value)}
+              fullWidth
+              margin="normal"
+            />
+            <TextField
+              label="Team B Starting XI (comma separated)"
+              name="teamBStartingXI"
+              value={newFixture.teamBStartingXI.join(', ')}
+              onChange={(e) => handleAddStartingXI('teamBStartingXI', e.target.value)}
               fullWidth
               margin="normal"
             />

@@ -1,10 +1,8 @@
 // Import necessary Firebase functions
-// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from 'react';
 import { collection, addDoc, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore';
 import { db } from '../../../../../firebaseConfig'; // Adjust path based on your setup
 import { Grid, Card, CardContent, Typography, CardMedia, Box, Button, Dialog, DialogContent, TextField, CircularProgress } from '@mui/material';
-// import MBLNavbar from '../../Navbar/MBLNavbar';
 
 const FixturesManagement = () => {
   const [fixtures, setFixtures] = useState([]);
@@ -17,14 +15,13 @@ const FixturesManagement = () => {
     teamB: '',
     teamBLogo: '',
     date: '',
-    time:'',
     stadium: '',
     status: ''
   });
 
   const fetchFixtures = async () => {
     try {
-      const fixturesCollection = collection(db, 'mblFixtures');
+      const fixturesCollection = collection(db, 'mlsFixtures');
       const fixturesSnapshot = await getDocs(fixturesCollection);
       const fixturesList = fixturesSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
       setFixtures(fixturesList);
@@ -47,7 +44,6 @@ const FixturesManagement = () => {
       teamB: '',
       teamBLogo: '',
       date: '',
-      time:'',
       stadium: '',
       status: ''
     });
@@ -65,9 +61,12 @@ const FixturesManagement = () => {
 
   const handleAddFixture = async () => {
     try {
-      await addDoc(collection(db, 'mblFixtures'), newFixture);
+      await addDoc(collection(db, 'mlsFixtures'), {
+        ...newFixture,
+        date: new Date(newFixture.date)
+      });
       handleClose();
-      fetchFixtures(); // Refresh the fixtures list
+      fetchFixtures();
     } catch (error) {
       console.error('Error adding fixture:', error);
     }
@@ -75,10 +74,13 @@ const FixturesManagement = () => {
 
   const handleUpdateFixture = async () => {
     try {
-      const fixtureDoc = doc(db, 'mblFixtures', selectedFixture.id);
-      await updateDoc(fixtureDoc, newFixture);
+      const fixtureDoc = doc(db, 'mlsFixtures', selectedFixture.id);
+      await updateDoc(fixtureDoc, {
+        ...newFixture,
+        date: new Date(newFixture.date)
+      });
       handleClose();
-      fetchFixtures(); // Refresh the fixtures list
+      fetchFixtures();
     } catch (error) {
       console.error('Error updating fixture:', error);
     }
@@ -86,9 +88,9 @@ const FixturesManagement = () => {
 
   const handleDeleteFixture = async (id) => {
     try {
-      const fixtureDoc = doc(db, 'mblFixtures', id);
+      const fixtureDoc = doc(db, 'mlsFixtures', id);
       await deleteDoc(fixtureDoc);
-      fetchFixtures(); // Refresh the fixtures list
+      fetchFixtures();
     } catch (error) {
       console.error('Error deleting fixture:', error);
     }
@@ -131,8 +133,7 @@ const FixturesManagement = () => {
                   </Box>
                 </Box>
                 <CardContent>
-                  <Typography>{new Date(fixture.date).toLocaleString()}</Typography>
-                  <Typography>Time: {fixture.time}</Typography> {/* Display Time */}
+                  <Typography>{new Date(fixture.date.seconds * 1000).toLocaleString()}</Typography>
                   <Typography>Stadium: {fixture.stadium}</Typography>
                   <Typography>Status: {fixture.status}</Typography>
                 </CardContent>
@@ -178,7 +179,7 @@ const FixturesManagement = () => {
               margin="normal"
             />
             <TextField
-              label="Date"
+              label="Date and Time"
               name="date"
               type="datetime-local"
               value={newFixture.date}
@@ -186,16 +187,6 @@ const FixturesManagement = () => {
               fullWidth
               margin="normal"
             />
-            <TextField
-                label="Time"
-                name="time"
-                type="time" // For time input
-                value={newFixture.time}
-                onChange={handleChange}
-                fullWidth
-                margin="normal"
-                />
-
             <TextField
               label="Stadium"
               name="stadium"

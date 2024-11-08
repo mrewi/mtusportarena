@@ -19,7 +19,11 @@ const Players = () => {
         const playersCollection = collection(db, 'mblPlayers');
         const playerSnapshot = await getDocs(playersCollection);
         const playersList = playerSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        setPlayers(playersList);
+        
+        // Sort players by club name in alphabetical order
+        const sortedPlayers = playersList.sort((a, b) => a.club.localeCompare(b.club));
+        
+        setPlayers(sortedPlayers);
       } catch (error) {
         console.error('Error fetching players:', error);
         setError('Failed to load players.');
@@ -27,9 +31,10 @@ const Players = () => {
         setLoading(false);
       }
     };
-
+  
     fetchPlayers();
   }, []);
+  
 
   const handleOpen = (player) => {
     setSelectedPlayer(player);
@@ -89,67 +94,85 @@ const Players = () => {
         </Grid>
       )}
 
-      <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
-        {selectedPlayer && (
-          <>
-            <DialogContent>
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center', paddingBottom: 2 }}>
-                    <CardMedia
-                      component="img"
-                      sx={{ width: 60, marginRight: 2 }}
-                      image={selectedPlayer.teamLogo}
-                      alt={`${selectedPlayer.club} logo`}
-                    />
-                    <Typography 
-                      variant="h1" 
-                      sx={{ 
-                        fontSize: '120px', 
-                        fontWeight: 'bold', 
-                        color: 'rgba(0, 0, 0, 0.1)'
-                      }}>
-                      {selectedPlayer.jersey}
-                    </Typography>
-                  </Box>
-                </Grid>
+<Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
+  {selectedPlayer && (
+    <>
+      <DialogContent>
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            <Box sx={{ position: 'relative', display: 'flex', alignItems: 'center', paddingBottom: 2 }}>
+              <CardMedia
+                component="img"
+                sx={{ width: 60, marginRight: 2 }}
+                image={selectedPlayer.teamLogo}
+                alt={`${selectedPlayer.club} logo`}
+              />
+              <Typography 
+                variant="h1" 
+                sx={{ 
+                  fontSize: '120px', 
+                  fontWeight: 'bold', 
+                  color: 'rgba(0, 0, 0, 0.1)'
+                }}>
+                {selectedPlayer.jersey}
+              </Typography>
 
-                <Grid item xs={12} md={4}>
-                  <CardMedia
-                    component="img"
-                    height="300"
-                    image={selectedPlayer.picture}
-                    alt={selectedPlayer.name}
-                    sx={{ borderRadius: '8px' }}
-                  />
-                </Grid>
-
-                <Grid item xs={12} md={8}>
-                  <Box sx={{ padding: 2 }}>
-                    <Typography variant="h6" gutterBottom>
-                      Club: {selectedPlayer.club}
-                    </Typography>
-                    <Divider sx={{ my: 1 }} />
-                    <Typography variant="body1">Appearances: {selectedPlayer.appearances}</Typography>
-                    <Typography variant="body1">Position: {selectedPlayer.position}</Typography>
-                    <Typography variant="body1">Goals: {selectedPlayer.goals}</Typography>
-                    <Typography variant="body1">Assists: {selectedPlayer.assists}</Typography>
-                    {selectedPlayer.position === 'Goalkeeper' && (
-                      <Typography variant="body1">Clean Sheets: {selectedPlayer.cleanSheets}</Typography>
-                    )}
-                    <Typography variant="body1">Rating: {selectedPlayer.rating}</Typography>
-                  </Box>
-                </Grid>
-              </Grid>
-            </DialogContent>
-            <Box sx={{ display: 'flex', justifyContent: 'flex-end', padding: 2 }}>
-              <Button onClick={handleClose} variant="contained" color="primary">
-                Close
-              </Button>
+              {/* Player name in the top-right corner */}
+              <Typography 
+                variant="h6"
+                sx={{
+                  position: 'absolute',
+                  top: 0,
+                  right: 0,
+                  padding: 1,
+                  backgroundColor: 'rgba(255, 255, 255, 0.7)',
+                  borderRadius: '4px',
+                  fontWeight: 'bold',
+                  zIndex: 1,
+                }}
+              >
+                {selectedPlayer.name}
+              </Typography>
             </Box>
-          </>
-        )}
-      </Dialog>
+          </Grid>
+
+          <Grid item xs={12} md={4}>
+            <CardMedia
+              component="img"
+              height="300"
+              image={selectedPlayer.picture}
+              alt={selectedPlayer.name}
+              sx={{ borderRadius: '8px' }}
+            />
+          </Grid>
+
+          <Grid item xs={12} md={8}>
+            <Box sx={{ padding: 2 }}>
+              <Typography variant="h6" gutterBottom>
+                Club: {selectedPlayer.club}
+              </Typography>
+              <Divider sx={{ my: 1 }} />
+              <Typography variant="body1">Appearances: {selectedPlayer.appearances}</Typography>
+              <Typography variant="body1">Position: {selectedPlayer.position}</Typography>
+              <Typography variant="body1">Points: {selectedPlayer.goals}</Typography>
+              <Typography variant="body1">Assists: {selectedPlayer.assists}</Typography>
+              {selectedPlayer.position === 'Goalkeeper' && (
+                <Typography variant="body1">Clean Sheets: {selectedPlayer.cleanSheets}</Typography>
+              )}
+              <Typography variant="body1">Rating: {selectedPlayer.rating}</Typography>
+            </Box>
+          </Grid>
+        </Grid>
+      </DialogContent>
+      <Box sx={{ display: 'flex', justifyContent: 'flex-end', padding: 2 }}>
+        <Button onClick={handleClose} variant="contained" color="primary">
+          Close
+        </Button>
+      </Box>
+    </>
+  )}
+</Dialog>
+
     </div>
   );
 };

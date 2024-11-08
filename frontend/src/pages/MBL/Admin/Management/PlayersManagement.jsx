@@ -18,6 +18,7 @@ const PlayersManagement = () => {
     picture: '',
     rating: '',
     goals: 0,
+    points: 0,
     assists: 0,
     appearances: 0,
     cleanSheets: 0,
@@ -53,6 +54,7 @@ const PlayersManagement = () => {
       picture: '',
       rating: '',
       goals: 0,
+      points: 0,
       assists: 0,
       appearances: 0,
       cleanSheets: 0,
@@ -195,6 +197,15 @@ const PlayersManagement = () => {
             fullWidth
             margin="normal"
           />
+          {/* <TextField
+            label="Points"
+            name="goals"
+            type="number"
+            value={newPlayer.points}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+          /> */}
           <TextField
             label="Assists"
             name="assists"

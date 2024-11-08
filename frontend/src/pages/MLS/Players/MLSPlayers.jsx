@@ -19,7 +19,9 @@ const Players = () => {
         const playersCollection = collection(db, 'mlsPlayers');
         const playerSnapshot = await getDocs(playersCollection);
         const playersList = playerSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        setPlayers(playersList);
+
+        const sortedPlayers = playersList.sort((a, b) => a.club.localeCompare(b.club));
+        setPlayers(sortedPlayers);
       } catch (error) {
         console.error('Error fetching players:', error);
         setError('Failed to load players.');
@@ -110,6 +112,23 @@ const Players = () => {
                       }}>
                       {selectedPlayer.jersey}
                     </Typography>
+
+                    {/* Player name in the top-right corner */}
+              <Typography 
+                variant="h6"
+                sx={{
+                  position: 'absolute',
+                  top: 0,
+                  right: 0,
+                  padding: 1,
+                  backgroundColor: 'rgba(255, 255, 255, 0.7)',
+                  borderRadius: '4px',
+                  fontWeight: 'bold',
+                  zIndex: 1,
+                }}
+              >
+                {selectedPlayer.name}
+              </Typography>
                   </Box>
                 </Grid>
 

@@ -1,10 +1,8 @@
 // Import necessary Firebase functions
-// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from 'react';
 import { collection, addDoc, deleteDoc, doc, getDocs, updateDoc } from 'firebase/firestore';
 import { db } from '../../../../../firebaseConfig'; // Adjust path based on your setup
 import { Grid, Card, CardContent, Typography, CardMedia, Box, Button, Dialog, DialogContent, TextField, CircularProgress } from '@mui/material';
-// import MBLNavbar from '../../Navbar/MBLNavbar';
 
 const FixturesManagement = () => {
   const [fixtures, setFixtures] = useState([]);
@@ -17,9 +15,10 @@ const FixturesManagement = () => {
     teamB: '',
     teamBLogo: '',
     date: '',
-    time:'',
     stadium: '',
-    status: ''
+    status: '',
+    teamAStartingV: [''],
+    teamBStartingV: ['']
   });
 
   const fetchFixtures = async () => {
@@ -40,17 +39,29 @@ const FixturesManagement = () => {
   }, []);
 
   const handleOpen = (fixture = null) => {
+    if (fixture) {
+      // Set newFixture to the selected fixture data, and convert the date to a string if necessary
+      setNewFixture({
+        ...fixture,
+        date: fixture.date.toDate().toISOString().slice(0, 16), // Format the date correctly for datetime-local input
+        teamAStartingV: fixture.teamAStartingV || [''],
+        teamBStartingV: fixture.teamBStartingV || [''],
+      });
+    } else {
+      // If no fixture is passed, reset newFixture to empty fields
+      setNewFixture({
+        teamA: '',
+        teamALogo: '',
+        teamB: '',
+        teamBLogo: '',
+        date: '',
+        stadium: '',
+        status: '',
+        teamAStartingV: [''],
+        teamBStartingV: ['']
+      });
+    }
     setSelectedFixture(fixture);
-    setNewFixture(fixture || {
-      teamA: '',
-      teamALogo: '',
-      teamB: '',
-      teamBLogo: '',
-      date: '',
-      time:'',
-      stadium: '',
-      status: ''
-    });
     setOpen(true);
   };
 
@@ -63,11 +74,21 @@ const FixturesManagement = () => {
     setNewFixture({ ...newFixture, [e.target.name]: e.target.value });
   };
 
+  const handleAddStartingXI = (team, value) => {
+    setNewFixture((prevState) => ({
+      ...prevState,
+      [team]: value.split(',')
+    }));
+  };
+
   const handleAddFixture = async () => {
     try {
-      await addDoc(collection(db, 'mblFixtures'), newFixture);
+      await addDoc(collection(db, 'mblFixtures'), {
+        ...newFixture,
+        date: new Date(newFixture.date)
+      });
       handleClose();
-      fetchFixtures(); // Refresh the fixtures list
+      fetchFixtures();
     } catch (error) {
       console.error('Error adding fixture:', error);
     }
@@ -76,9 +97,12 @@ const FixturesManagement = () => {
   const handleUpdateFixture = async () => {
     try {
       const fixtureDoc = doc(db, 'mblFixtures', selectedFixture.id);
-      await updateDoc(fixtureDoc, newFixture);
+      await updateDoc(fixtureDoc, {
+        ...newFixture,
+        date: new Date(newFixture.date)
+      });
       handleClose();
-      fetchFixtures(); // Refresh the fixtures list
+      fetchFixtures();
     } catch (error) {
       console.error('Error updating fixture:', error);
     }
@@ -88,7 +112,7 @@ const FixturesManagement = () => {
     try {
       const fixtureDoc = doc(db, 'mblFixtures', id);
       await deleteDoc(fixtureDoc);
-      fetchFixtures(); // Refresh the fixtures list
+      fetchFixtures();
     } catch (error) {
       console.error('Error deleting fixture:', error);
     }
@@ -131,8 +155,7 @@ const FixturesManagement = () => {
                   </Box>
                 </Box>
                 <CardContent>
-                  <Typography>{new Date(fixture.date).toLocaleString()}</Typography>
-                  <Typography>Time: {fixture.time}</Typography> {/* Display Time */}
+                  <Typography>{new Date(fixture.date.seconds * 1000).toLocaleString()}</Typography>
                   <Typography>Stadium: {fixture.stadium}</Typography>
                   <Typography>Status: {fixture.status}</Typography>
                 </CardContent>
@@ -178,7 +201,7 @@ const FixturesManagement = () => {
               margin="normal"
             />
             <TextField
-              label="Date"
+              label="Date and Time"
               name="date"
               type="datetime-local"
               value={newFixture.date}
@@ -186,16 +209,6 @@ const FixturesManagement = () => {
               fullWidth
               margin="normal"
             />
-            <TextField
-                label="Time"
-                name="time"
-                type="time" // For time input
-                value={newFixture.time}
-                onChange={handleChange}
-                fullWidth
-                margin="normal"
-                />
-
             <TextField
               label="Stadium"
               name="stadium"
@@ -209,6 +222,24 @@ const FixturesManagement = () => {
               name="status"
               value={newFixture.status}
               onChange={handleChange}
+              fullWidth
+              margin="normal"
+            />
+
+             {/* Starting V Input */}
+             <TextField
+              label="Team A Starting V (comma separated)"
+              name="teamAStartingV"
+              value={newFixture.teamAStartingV.join(', ')}
+              onChange={(e) => handleAddStartingXI('teamAStartingV', e.target.value)}
+              fullWidth
+              margin="normal"
+            />
+            <TextField
+              label="Team B Starting V (comma separated)"
+              name="teamBStartingV"
+              value={newFixture.teamBStartingV.join(', ')}
+              onChange={(e) => handleAddStartingXI('teamBStartingV', e.target.value)}
               fullWidth
               margin="normal"
             />

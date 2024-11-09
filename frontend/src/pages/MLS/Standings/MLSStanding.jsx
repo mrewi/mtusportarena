@@ -15,6 +15,9 @@ const Standing = () => {
       const standingsSnapshot = await getDocs(standingsCollection);
       const standingsList = standingsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
 
+      // Sort teams by points in descending order
+      standingsList.sort((a, b) => b.points - a.points);
+
       // Divide teams into Group A and Group B
       const groupA = standingsList.filter(team => team.group === 'A');
       const groupB = standingsList.filter(team => team.group === 'B');
@@ -59,9 +62,9 @@ const Standing = () => {
               <TableCell>{team.won}</TableCell>
               <TableCell>{team.draw}</TableCell>
               <TableCell>{team.lost}</TableCell>
-              <TableCell>{team.goalsFor}</TableCell>
-              <TableCell>{team.goalsAgainst}</TableCell>
-              <TableCell>{team.goalDifference}</TableCell>
+              <TableCell>{team.gf}</TableCell>
+              <TableCell>{team.ga}</TableCell>
+              <TableCell>{team.gd}</TableCell>
               <TableCell>{team.points}</TableCell>
               {/* Uncomment below if you add a button for inline updates */}
               {/* <TableCell>
@@ -84,4 +87,3 @@ const Standing = () => {
 };
 
 export default Standing;
-  

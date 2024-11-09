@@ -3,13 +3,14 @@ import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../../../firebaseConfig';
 import {
   Grid, Card, CardContent, Typography, CardMedia, Box,
-  Modal, Button
+  Modal, Button, CircularProgress
 } from '@mui/material';
 import MLSNavbar from '../Navbar/MLSNavbar';
 
 const Fixtures = () => {
   const [fixtures, setFixtures] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [openModal, setOpenModal] = useState(false);
   const [selectedFixture, setSelectedFixture] = useState(null);
 
@@ -32,6 +33,7 @@ const Fixtures = () => {
         setFixtures(fixturesList);
       } catch (error) {
         console.error('Error fetching fixtures:', error);
+        setError('Failed to load fixtures.');
       } finally {
         setLoading(false);
       }
@@ -40,11 +42,21 @@ const Fixtures = () => {
     fetchFixtures();
   }, []);
 
-  if (loading) return <p>Loading fixtures...</p>;
+  // if (loading) return <p>Loading fixtures...</p>;
 
   return (
     <div>
       <MLSNavbar />
+      {loading ? (
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '50vh' }}>
+          <CircularProgress />
+        </Box>
+      ) : error ? (
+        <Box sx={{ textAlign: 'center', padding: 2 }}>
+          <Typography color="error" variant="body1">{error}</Typography>
+        </Box>
+      ) : (
+        <>
       <Box sx={{ textAlign: 'center', padding: 2 }}>
         <Typography variant="h4" gutterBottom>Game Week 1</Typography>
       </Box>
@@ -102,7 +114,8 @@ const Fixtures = () => {
           ))}
         </Grid>
       </Box>
-
+</>
+      )}
       {/* Modal for Fixture Details */}
 {selectedFixture && (
   <Modal open={openModal} onClose={handleCloseModal} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

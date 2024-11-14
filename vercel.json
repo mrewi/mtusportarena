@@ -1,0 +1,9 @@
+{
+    "rewrites": [
+      { "source": "/mls/admin-dashboard", "destination": "/mls/admin-dashboard" }
+    ],
+    "redirects": [
+      { "source": "/mls/admin-dashboard", "destination": "/mls/admin-dashboard", "permanent": true }
+    ]
+  }
+  

@@ -33,6 +33,7 @@ import FixturesManagement from './pages/MBL/Admin/Management/FixturesManagement'
 import MLSFixturesManagement from './pages/MLS/Admin/Management/MLSFixturesManagement'
 import MLSStandingsManagement from './pages/MLS/Admin/Management/MLSStandingsManagement'
 import StandingsManagement from './pages/MBL/Admin/Management/StandingsManagement'
+import MLSStatssManagement from './pages/MLS/Admin/Management/MLSStatsManagement'
 import MBLProtectedRoute from './pages/MBL//Admin/MBLProctectedRoute'
 import MLSProtectedRoute from './pages/MLS/Admin/MLSProtectedRoute'
 
@@ -142,14 +143,14 @@ const App = () => {
                   <MBLAdminDashboard />
                 </ProtectedRoute>
               }
-            />
-            <Route path="/mbl/admin-dashboard" element={
-                <ProtectedRoute>
-                  <MBLAdminDashboard />
-                </ProtectedRoute>
+            /> */}
+            <Route path="/mls/admin-dashboard/stats" element={
+                <MLSProtectedRoute>
+                  <MLSStatssManagement />
+                </MLSProtectedRoute>
               }
             />
-            <Route path="/mbl/admin-dashboard" element={
+            {/* <Route path="/mbl/admin-dashboard" element={
                 <ProtectedRoute>
                   <MBLAdminDashboard />
                 </ProtectedRoute>

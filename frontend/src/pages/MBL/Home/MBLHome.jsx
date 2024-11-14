@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import BasketballMedia1 from '../assets/Screenshot 2024-11-05 224651.png'
-import BasketballMedia4 from '../assets/Screenshot 2024-11-05 224839.png'
-import BasketballMedia2 from '../assets/Screenshot 2024-11-05 224822.png'
+import BasketballMedia1 from '../assets/basketball home media 5.jpg'
+// import BasketballMedia4 from '../assets/Screenshot 2024-11-05 224839.png'
+import BasketballMedia2 from '../assets/highlight1 home.jpg'
 
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../../../firebaseConfig';

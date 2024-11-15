@@ -1,10 +1,17 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from 'react';
 import FootballMedia1 from '../assets/football home media 1.jpg';
 import FootballMedia2 from '../assets/football home media 2.jpg';
 import FootballMedia3 from '../assets/football home media 3.jpg';
 import FootballMedia4 from '../assets/football home media 4.jpg';
 import FootballMedia5 from '../assets/football home media 5.jpg';
-import FootballMedia6 from '../assets/football home media 6.jpg';
+import FootballMedia6 from '../assets/main media 17.jpg';
+import FaceOfTheWeek from '../Club/OlurinUnited/OlurinUnited.png';
+import PlayerOfTheWeek from '../Club/OlurinUnited/OlurinUnited.png';
+import CoachOfTheWeek from '../Club/AbialaGiants/AbialaGiants.png';
+import GloveOfTheWeek from '../Club/OlukoyaStars/OlukoyaStars.png';
+import RookieOfTheWeek from '../Club/AbialaGiants/AbialaGiants.png';
+import TeamOfTheWeek1 from '../assets/teamof the week1.png';
 import FootballMediaHighlight1 from '../assets/football highlight 1 home.jpg';
 import FootballMediaHighlight2 from '../assets/football highlight 2 home.jpg';
 import FootballMediaHighlight3 from '../assets/football highlight 3 home.jpg';
@@ -21,27 +28,37 @@ const Home = () => {
   const [fixtures, setFixtures] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [openModal, setOpenModal] = useState(false);
+  const [openPlayerModal, setOpenPlayerModal] = useState(true);  // Show "Player of the Week" modal on page load
+  const [openFixtureModal, setOpenFixtureModal] = useState(false);  // Fixture details modal
   const [selectedFixture, setSelectedFixture] = useState(null);
-  
-  // Slideshow state and effect
-  const images = [FootballMedia1, FootballMedia2, FootballMedia3, FootballMedia4, FootballMedia5, FootballMedia6 ];
+
+  const playerImages = [
+    { image: PlayerOfTheWeek, label: "Player of the Week: Chisom" },
+    { image: CoachOfTheWeek, label: "Coach of the Week: Abraham" },
+    { image: RookieOfTheWeek, label: "Rookie of the Week: Femi" },
+    { image: GloveOfTheWeek, label: "Glove of the Week: Cabaman" },
+    { image: FaceOfTheWeek, label: "Face of the Week: Coach Doyin" }
+  ];
+  const teamOfTheWeekImage = TeamOfTheWeek1;
+
+  const images = [FootballMedia1, FootballMedia2, FootballMedia3, FootballMedia4, FootballMedia5, FootballMedia6];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 2500); // Change image every 2 seconds
+    }, 2500);
 
     return () => clearInterval(intervalId);
   }, [images.length]);
 
-  const handleOpenModal = (fixture) => {
+  const handleOpenFixtureModal = (fixture) => {
     setSelectedFixture(fixture);
-    setOpenModal(true);
+    setOpenFixtureModal(true);
   };
 
-  const handleCloseModal = () => setOpenModal(false);
+  const handleClosePlayerModal = () => setOpenPlayerModal(false);
+  const handleCloseFixtureModal = () => setOpenFixtureModal(false);
 
   useEffect(() => {
     const fetchFixtures = async () => {
@@ -49,12 +66,11 @@ const Home = () => {
         const fixturesCollection = collection(db, 'mlsFixtures');
         const fixturesSnapshot = await getDocs(fixturesCollection);
         const fixturesList = fixturesSnapshot.docs.map(doc => ({
-          id: doc.id, 
+          id: doc.id,
           ...doc.data(),
-          date: doc.data().date.toDate()  // Convert Firebase Timestamp to Date object
+          date: doc.data().date.toDate()
         }));
 
-        // Sort fixtures by date (ascending order)
         fixturesList.sort((a, b) => a.date - b.date);
         
         setFixtures(fixturesList);
@@ -73,16 +89,52 @@ const Home = () => {
     <div>
       <MLSNavbar />
       <Box sx={{ p: 3, fontFamily: 'Roboto Mono, monospace' }}>
+        
+      <Modal
+        open={openPlayerModal}
+        onClose={handleClosePlayerModal}
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          overflowY: 'auto',  // Allow vertical scrolling for the entire modal on smaller screens
+        }}
+      >
+        <Box
+          sx={{
+            bgcolor: 'background.paper',
+            p: { xs: 2, sm: 4 },  // Responsive padding
+            borderRadius: 2,
+            boxShadow: 24,
+            textAlign: 'center',
+            maxHeight: '90vh',  // Limit height to 90% of viewport height for better fit
+            overflowY: 'auto',  // Allow scrolling within the box if content is too long
+            width: { xs: '90%', sm: '80%', md: '60%' },  // Responsive width
+          }}
+        >
+          <Typography variant="h6" sx={{ mb: 2 }}>Weekly Awards</Typography>
+          <Grid container spacing={2}>
+            {playerImages.map((item, index) => (
+              <Grid item xs={12} sm={6} md={4} key={index}>
+                <Card>
+                  <CardMedia component="img" height="140" image={item.image} alt={item.label} />
+                  <CardContent>
+                    <Typography variant="body1">{item.label}</Typography>
+                  </CardContent>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+          <Button onClick={handleClosePlayerModal} variant="contained" color="primary" sx={{ mt: 2 }}>Close</Button>
+        </Box>
+      </Modal>
+
+
         <Grid container spacing={3}>
           {/* Main Media Card with Slideshow */}
           <Grid item xs={12} md={8}>
             <Card sx={{ position: 'relative', height: 400 }}>
-              <CardMedia
-                component="img"
-                height="400"
-                image={images[currentImageIndex]}  // Display the current image
-                alt="Football Media"
-              />
+              <CardMedia component="img" height="400" image={images[currentImageIndex]} alt="Football Media" />
               <CardContent
                 sx={{
                   position: 'absolute',
@@ -98,7 +150,7 @@ const Home = () => {
                   FULL FOCUS: 8 TEAMS. 3 GAMES
                 </Typography>
                 <Typography variant="subtitle1" sx={{ fontFamily: 'Roboto Mono, monospace' }}>
-                  From stellar performances to jaw-dropping highlights, every team gets in on the fun.
+                Unstoppable Solo Run! CHISOM dribbles past four defenders, finishing with a calm strike to put OLURIN UNITED ahead in a breathtaking display of skill.
                 </Typography>
               </CardContent>
             </Card>
@@ -107,7 +159,7 @@ const Home = () => {
           {/* Fixtures Section */}
           <Grid item xs={12} md={4}>
             <Paper sx={{ p: 2, mb: 2 }}>
-              <Typography variant="h6" sx={{ mb: 1 }}>
+              <Typography variant="h6" sx={{ mb: 1, fontFamily:'robeto mono, monospace' }}>
                 Upcoming Fixtures
               </Typography>
               {loading ? (
@@ -123,7 +175,7 @@ const Home = () => {
                   <Card
                     key={fixture.id}
                     sx={{ display: 'flex', alignItems: 'center', mb: 1, cursor: 'pointer' }}
-                    onClick={() => handleOpenModal(fixture)}
+                    onClick={() => handleOpenFixtureModal(fixture)}
                   >
                     <CardMedia
                       component="img"
@@ -158,33 +210,15 @@ const Home = () => {
             Highlights
           </Typography>
           <Grid container spacing={3}>
-            {/* Highlight data with unique images and descriptions */}
             {[
-              {
-                image: FootballMediaHighlight1,
-                description: "Spectacular goal from the halfway line that stunned everyone!",
-              },
-              {
-                image: FootballMediaHighlight2,
-                description: "An incredible save that kept the score level in the final minutes.",
-              },
-              {
-                image: FootballMediaHighlight3,
-                description: "A powerful header from a corner to win the game!",
-              },
-              {
-                image: FootballMediaHighlight4,
-                description: "A powerful header from a corner to win the game!",
-              },
+              { image: FootballMediaHighlight1, description: "Spectacular goal from the halfway line that stunned everyone!" },
+              { image: FootballMediaHighlight2, description: "An incredible save that kept the score level in the final minutes." },
+              { image: FootballMediaHighlight3, description: "A powerful header from a corner to win the game!" },
+              { image: FootballMediaHighlight4, description: "Sensational Free Kick! Player A curls a stunning free kick into the top corner from 25 yards out, giving Team L a crucial lead in the final minutes!" },
             ].map((highlight, index) => (
               <Grid item xs={12} sm={6} md={3} key={index}>
                 <Card>
-                  <CardMedia
-                    component="img"
-                    height="200"
-                    image={highlight.image}
-                    alt="Highlight"
-                  />
+                  <CardMedia component="img" height="200" image={highlight.image} alt="Highlight" />
                   <CardContent>
                     <Typography variant="body2">
                       {highlight.description}
@@ -198,7 +232,7 @@ const Home = () => {
 
         {/* Modal for Fixture Details */}
         {selectedFixture && (
-          <Modal open={openModal} onClose={handleCloseModal} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Modal open={openFixtureModal} onClose={handleCloseFixtureModal} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <Box
               sx={{
                 width: 400,
@@ -248,10 +282,20 @@ const Home = () => {
                   hour12: true
                 })}
               </Typography>
-              <Button onClick={handleCloseModal} variant="contained" color="primary" sx={{ mt: 2 }}>Close</Button>
+              <Button onClick={handleCloseFixtureModal} variant="contained" color="primary" sx={{ mt: 2 }}>Close</Button>
             </Box>
           </Modal>
         )}
+
+        {/* Team of the Week Section */}
+        <Box sx={{ mt: 5, mb: 5 }}>
+          <Typography variant="h4" align="center" sx={{ mb: 2, fontWeight: 'bold' }}>
+            Team of the Week
+          </Typography>
+          <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+            <CardMedia component="img" image={teamOfTheWeekImage} alt="Team of the Week" sx={{ maxWidth: '50%', height: 'auto' }} />
+          </Box>
+        </Box>
       </Box>
     </div>
   );

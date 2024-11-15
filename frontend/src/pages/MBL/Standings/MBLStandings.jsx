@@ -16,6 +16,15 @@ const Standing = () => {
         const standingsCollection = collection(db, 'mblStandings');
         const standingsSnapshot = await getDocs(standingsCollection);
         const standingsData = standingsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        
+        // Sort by wins in descending order, then by PPG in descending order if wins are tied
+        standingsData.sort((a, b) => {
+          if (b.won === a.won) {
+            return b.ppg - a.ppg;
+          }
+          return b.won - a.won;
+        });
+        
         setTeams(standingsData);
       } catch (error) {
         console.error("Error fetching standings: ", error);
@@ -23,9 +32,10 @@ const Standing = () => {
         setLoading(false);
       }
     };
-
+  
     fetchStandings();
   }, []);
+  
 
   return (
     <div>

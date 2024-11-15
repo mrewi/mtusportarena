@@ -47,7 +47,7 @@ const Navbar = () => {
             />
           </Box>
           <Typography sx={{color:'white', fontFamily:'Roberto Mono, Monospace', fontSize:'35px'}}>
-              MTU SPORT ARENA
+              MTU SPORTS ARENA
             </Typography>
         </Toolbar>
       </AppBar>

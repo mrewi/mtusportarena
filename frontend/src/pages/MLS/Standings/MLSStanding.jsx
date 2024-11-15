@@ -14,19 +14,24 @@ const Standing = () => {
       const standingsCollection = collection(db, 'mlsStandings');
       const standingsSnapshot = await getDocs(standingsCollection);
       const standingsList = standingsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-
-      // Sort teams by points in descending order
-      standingsList.sort((a, b) => b.points - a.points);
-
+  
+      // Sort teams by points in descending order, then by GD in descending order if points are tied
+      standingsList.sort((a, b) => {
+        if (b.points === a.points) {
+          return b.gd - a.gd;
+        }
+        return b.points - a.points;
+      });
+  
       // Divide teams into Group A and Group B
       const groupA = standingsList.filter(team => team.group === 'A');
       const groupB = standingsList.filter(team => team.group === 'B');
-
+  
       setGroupATeams(groupA);
       setGroupBTeams(groupB);
       setTeams(standingsList);  // Optional: keep a full list if needed
     };
-
+  
     fetchStandings();
   }, []);
 

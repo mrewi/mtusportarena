@@ -1,75 +1,73 @@
-// eslint-disable-next-line no-unused-vars
-import React from 'react';
-import { AppBar, Toolbar, Box, Button, CardMedia, Typography, IconButton } from '@mui/material';
+// Import necessary dependencies
+import React, { useState } from 'react';
+import { AppBar, Toolbar, Box, Button, CardMedia, Typography, IconButton, Drawer, List, ListItem, ListItemText } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import MenuIcon from '@mui/icons-material/Menu';
 import { Link } from 'react-router-dom';
-import AbialaBucksLogo from '../Clubs/AbialaBucks/bucks.png'
-import AdeshinaHawksLogo from '../Clubs/AdeshinaHawks/hawks.png'
-import OlukoyaEaglesLogo from '../Clubs/OlukoyaEagles/eagles.png'
-import OlurinHornetsLogo from '../Clubs/OlurinHornets/hornets.png'
-import YoungPelicansLogo from '../Clubs/YoungPelicans/pelicans.png'
-import MBLLogo from '../assets/mbl bal.png'
+import useMediaQuery from '@mui/material/useMediaQuery';
+import AbialaBucks from '../Clubs/AbialaBucks/bucks.png'
+import AdeshinaHawks from '../Clubs/AdeshinaHawks/hawks.png'
+import OlurinHornets from '../Clubs/OlurinHornets/hornets.png'
+import OlukoyaEagles from '../Clubs/OlukoyaEagles/eagles.png'
+import YoungPelicans from '../Clubs/YoungPelicans/pelicans.png'
+import MBLLOGO from '../assets/mbl bal.png'
 
-
-// Sample team data, now fetching logos from the local directory
+// Sample team data with logos and team URLs
 const teams = [
-  {  name: 'Abiala Bucks', logo: AbialaBucksLogo, id: '/mbl/clubs/abiala-bucks' },
-  {  name: 'Adeshina Hawks', logo: AdeshinaHawksLogo, id: '/mbl/clubs/adeshina-hawks' },
-  {  name: 'Olukoya Eagles', logo: OlukoyaEaglesLogo, id: '/mbl/clubs/olukoya-eagles' },
-  {  name: 'Olurin Hornets', logo: OlurinHornetsLogo, id: '/mbl/clubs/olurin-hornets' },
-  {  name: 'Young Pelicans', logo: YoungPelicansLogo, id: '/mbl/clubs/young-pelicans' },
+  { id: 1, name: 'Abiala Bucks', logo: AbialaBucks, teamUrl: '/mbl/clubs/abiala-bucks' },
+  { id: 2, name: 'Adeshina Hawks', logo: AdeshinaHawks, teamUrl: '/mbl/clubs/adeshina-hawks' },
+  { id: 3, name: 'Olurin Hornets', logo: OlurinHornets, teamUrl: '/mbl/clubs/olurin-hornets' },
+  { id: 4, name: 'Olukoya Eagles', logo: OlukoyaEagles, teamUrl: '/mbl/clubs/olukoya-eagles' },
+  { id: 5, name: 'Young Pelicans', logo: YoungPelicans, teamUrl: '/mbl/clubs/young-pelicans' },
 ];
 
 const Navbar = () => {
+  const isTabletOrSmallScreen = useMediaQuery('(max-width:960px)'); // Trigger drawer for tablets and smaller
+  const [drawerOpen, setDrawerOpen] = useState(false);
+
+  const toggleDrawer = () => {
+    setDrawerOpen(!drawerOpen);
+  };
+
   return (
     <div>
-      <AppBar position="static" sx={{ backgroundColor: 'grey', position: 'relative' }}>
+      {/* Main AppBar with Logo and Title */}
+      <AppBar position="static" sx={{ backgroundColor: 'grey' }}>
         <Toolbar sx={{ justifyContent: 'center', position: 'relative' }}>
-          {/* Centered Logo and Title */}
           <Box sx={{ display: 'flex', alignItems: 'center', position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}>
-            <CardMedia
-              component="img"
-              sx={{
-                width: 50,
-                height: 50,
-                objectFit: 'contain',
-                marginRight: '1rem',
-              }}
-              image={MBLLogo}
-              alt="App logo"
-            />
-            <Typography sx={{ color: 'white', fontFamily: 'Roberto Mono, Monospace', fontSize: '35px' }}>
+            {/* Display the logo on larger screens */}
+            {!isTabletOrSmallScreen && (
+              <CardMedia
+                component="img"
+                sx={{ width: 50, height: 50, objectFit: 'contain', marginRight: '1rem' }}
+                image={MBLLOGO}
+                alt="App logo"
+              />
+            )}
+            <Typography sx={{ color: 'white', fontFamily: 'Roboto Mono, monospace', fontSize: isTabletOrSmallScreen ? '20px' : '35px' }}>
               MTU BASKETBALL LEAGUE
             </Typography>
           </Box>
-
-          {/* Admin Button on the Far Right */}
+          {/* Admin Button on the right */}
           <Box sx={{ position: 'absolute', right: 0 }}>
-            <Button component={Link} to="/mbl/admin-auth" sx={{ fontFamily: 'Roberto Mono, Monospace', backgroundColor: 'grey', color: 'white', fontSize: '20px' }}>
+            <Button component={Link} to="/mls/admin-auth" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'grey', color: 'white', fontSize: '20px' }}>
               ADMIN
             </Button>
           </Box>
         </Toolbar>
       </AppBar>
 
-
-      {/* Main AppBar with logo and team logos */}
+      {/* AppBar for Team Logos */}
       <AppBar position="static" sx={{ backgroundColor: 'black' }}>
         <Toolbar sx={{ justifyContent: 'center' }}>
-          {/* Center the team logos */}
-          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 2 }}>
+          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 2, flexWrap: 'wrap' }}>
             {teams.map((team) => (
-              <Box key={team.id} sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <a href={team.teamUrl} target="_self" rel="noopener noreferrer"> {/* Navigating to team's page */}
+              <Box key={team.id}>
+                <a href={team.teamUrl}>
                   <CardMedia
                     component="img"
-                    sx={{
-                      width: 80,    // Set the maximum width to 50px
-                      height: 60,   // Set the maximum height to 50px
-                      objectFit: 'contain', // Ensure the logos resize proportionally without being cut
-                      margin: 1     // Add spacing between each logo
-                    }}
-                    image={team.logo} // Fetch the logo from the local directory
+                    sx={{ width: 40, height: 40, objectFit: 'contain', margin: 1 }}
+                    image={team.logo}
                     alt={`${team.name} logo`}
                   />
                 </a>
@@ -79,43 +77,49 @@ const Navbar = () => {
         </Toolbar>
       </AppBar>
 
-      {/* Navigation Bar */}
+      {/* Navigation Bar with Menu or Button Links */}
       <AppBar position="static" sx={{ backgroundColor: 'white' }}>
         <Toolbar sx={{ justifyContent: 'center' }}>
-        <IconButton component={Link} to="/" sx={{ color: 'black' }}>
-          <ArrowBackIcon />
-        </IconButton>
-          <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap' }}>
-            <Button component={Link} to="/mbl/home" sx={{ fontFamily:'Roberto Mono, Monospace',backgroundColor: 'black', color: 'white' }}>
-              Home
-            </Button>
-            <Button component={Link} to="/mbl/players" sx={{ fontFamily:'Roberto Mono, Monospace',backgroundColor: 'black', color: 'white' }}>
-              Players
-            </Button>
-            <Button component={Link} to="/mbl/matches" sx={{ fontFamily:'Roberto Mono, Monospace',backgroundColor: 'black', color: 'white' }}>
-              Fixtures
-            </Button>
-            <Button component={Link} to="/mbl/results" sx={{ fontFamily:'Roberto Mono, Monospace',backgroundColor: 'black', color: 'white' }}>
-              Results
-            </Button>
-            <Button component={Link} to="/mbl/standings" sx={{ fontFamily:'Roberto Mono, Monospace',backgroundColor: 'black', color: 'white' }}>
-              Standings
-            </Button>
-            <Button component={Link} to="/mbl/stats" sx={{ fontFamily:'Roberto Mono, Monospace',backgroundColor: 'black', color: 'white' }}>
-              Stats
-            </Button>
-            <Button component={Link} to="/mbl/transfers" sx={{ fontFamily:'Roberto Mono, Monospace',backgroundColor: 'black', color: 'white' }}>
-              Transfers
-            </Button>
-            <Button component={Link} to="/mbl/news" sx={{ fontFamily:'Roberto Mono, Monospace',backgroundColor: 'black', color: 'white' }}>
-              News
-            </Button>
-            <Button component={Link} to="/mbl/clubs" sx={{ fontFamily:'Roberto Mono, Monospace',backgroundColor: 'black', color: 'white' }}>
-              Clubs
-            </Button>
-          </Box>
+          <IconButton component={Link} to="/" sx={{ color: 'black' }}>
+            <ArrowBackIcon />
+          </IconButton>
+
+          {/* Display Menu Icon on Tablet or Smaller Screens, Buttons on Larger Screens */}
+          {isTabletOrSmallScreen ? (
+            <IconButton onClick={toggleDrawer} sx={{ color: 'black', marginLeft: 'auto' }}>
+              <MenuIcon />
+            </IconButton>
+          ) : (
+            <Box sx={{ display: 'flex', gap: 2 }}>
+              {/* Navigation Buttons */}
+              <Button component={Link} to="/mls/home" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'black', color: 'white' }}>Home</Button>
+              <Button component={Link} to="/mls/players" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'black', color: 'white' }}>Players</Button>
+              {/* <Button component={Link} to="/mls/matches" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'purple', color: 'white' }}>Fixtures</Button> */}
+              <Button component={Link} to="/mls/results" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'black', color: 'white' }}>Results</Button>
+              <Button component={Link} to="/mls/standings" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'black', color: 'white' }}>Standings</Button>
+              <Button component={Link} to="/mls/stats" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'black', color: 'white' }}>Stats</Button>
+              <Button component={Link} to="/mls/transfers" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'black', color: 'white' }}>Transfers</Button>
+              <Button component={Link} to="/mls/news" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'black', color: 'white' }}>News</Button>
+              <Button component={Link} to="/mls/clubs" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'black', color: 'white' }}>Clubs</Button>
+            </Box>
+          )}
         </Toolbar>
       </AppBar>
+
+      {/* Drawer for Tablet and Small Screen Navigation */}
+      <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer}>
+        <List>
+          <ListItem button component={Link} to="/mls/home" onClick={toggleDrawer}><ListItemText primary="Home" /></ListItem>
+          <ListItem button component={Link} to="/mls/players" onClick={toggleDrawer}><ListItemText primary="Players" /></ListItem>
+          {/* <ListItem button component={Link} to="/mls/matches" onClick={toggleDrawer}><ListItemText primary="Fixtures" /></ListItem> */}
+          <ListItem button component={Link} to="/mls/results" onClick={toggleDrawer}><ListItemText primary="Results" /></ListItem>
+          <ListItem button component={Link} to="/mls/standings" onClick={toggleDrawer}><ListItemText primary="Standings" /></ListItem>
+          <ListItem button component={Link} to="/mls/stats" onClick={toggleDrawer}><ListItemText primary="Stats" /></ListItem>
+          <ListItem button component={Link} to="/mls/transfers" onClick={toggleDrawer}><ListItemText primary="Transfers" /></ListItem>
+          <ListItem button component={Link} to="/mls/news" onClick={toggleDrawer}><ListItemText primary="News" /></ListItem>
+          <ListItem button component={Link} to="/mls/clubs" onClick={toggleDrawer}><ListItemText primary="Clubs" /></ListItem>
+          </List>
+      </Drawer>
     </div>
   );
 };

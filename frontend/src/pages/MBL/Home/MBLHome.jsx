@@ -12,11 +12,11 @@ import BasketballMedia9 from '../assets/basketball home media 9.jpg';
 import BasketballMedia10 from '../assets/basketball home media 10.jpg';
 import BasketballMedia11 from '../assets/basketball home media 11.jpg';
 import BasketballMedia12 from '../assets/basketball home media 12.jpg';
-import FaceOfTheWeek from '../Clubs/AbialaBucks/bucks.png';
-import PlayerOfTheWeek from '../Clubs/AbialaBucks/bucks.png';
-import CoachOfTheWeek from '../Clubs/AbialaBucks/bucks.png';
-import DunkOfTheWeek from '../Clubs/AbialaBucks/bucks.png';
-import RookieOfTheWeek from '../Clubs/YoungPelicans/pelicans.png';
+import FaceOfTheWeek from '../Clubs/YoungPelicans/pelicans.png';
+import PlayerOfTheWeek from '../Clubs/OlurinHornets/hornets.png';
+import CoachOfTheWeek from '../Clubs/AdeshinaHawks/hawks.png';
+import PotOfTheWeek from '../Clubs/OlukoyaEagles/eagles.png';
+import RookieOfTheWeek from '../Clubs/AbialaBucks/bucks.png';
 // import TeamOfTheWeek1 from '../assets/teamof the week1.png';
 import BasketballMediaHighlight1 from '../assets/basketball media highlight 1.jpg';
 import BasketballMediaHighlight2 from '../assets/basketball media highlight 2.jpg';
@@ -39,11 +39,11 @@ const Home = () => {
   const [selectedFixture, setSelectedFixture] = useState(null);
 
   const playerImages = [
-    { image: PlayerOfTheWeek, label: "Player of the Week: Dabira" },
-    { image: CoachOfTheWeek, label: "Coach of the Week: Coach Keku" },
-    { image: RookieOfTheWeek, label: "Rookie of the Week: Chicago" },
-    { image: DunkOfTheWeek, label: "Dunk of the Week: Dabira" },
-    { image: FaceOfTheWeek, label: "Face of the Week: Coach Ewi" }
+    { image: PlayerOfTheWeek, label: "Player of the Week: Jachi" },
+    { image: CoachOfTheWeek, label: "Coach of the Week: Coach Julo" },
+    { image: RookieOfTheWeek, label: "Rookie of the Week: Manfred" },
+    { image: PotOfTheWeek, label: "Pot of the Week: Ire" },
+    { image: FaceOfTheWeek, label: "Face of the Week: Coach Tomiwa" }
   ];
   // const teamOfTheWeekImage = TeamOfTheWeek1;
 
@@ -118,7 +118,7 @@ const Home = () => {
             width: { xs: '90%', sm: '80%', md: '60%' },  // Responsive width
           }}
         >
-          <Typography variant="h6" sx={{ mb: 2 }}>Weekly Awards</Typography>
+          <Typography variant="h6" sx={{ mb: 2 }}>Round 2 Weekly Awards</Typography>
           <Grid container spacing={2}>
             {playerImages.map((item, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>

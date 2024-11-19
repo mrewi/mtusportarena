@@ -14,7 +14,7 @@ import BasketballMedia11 from '../assets/basketball home media 11.jpg';
 import BasketballMedia12 from '../assets/basketball home media 12.jpg';
 import FaceOfTheWeek from '../Clubs/YoungPelicans/pelicans.png';
 import PlayerOfTheWeek from '../Clubs/OlurinHornets/hornets.png';
-import CoachOfTheWeek from '../Clubs/AdeshinaHawks/hawks.png';
+import CoachOfTheWeek from '../assets/julo.png';
 import PotOfTheWeek from '../Clubs/OlukoyaEagles/eagles.png';
 import RookieOfTheWeek from '../Clubs/AbialaBucks/bucks.png';
 // import TeamOfTheWeek1 from '../assets/teamof the week1.png';

@@ -92,15 +92,15 @@ const Navbar = () => {
           ) : (
             <Box sx={{ display: 'flex', gap: 2 }}>
               {/* Navigation Buttons */}
-              <Button component={Link} to="/mls/home" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'black', color: 'white' }}>Home</Button>
-              <Button component={Link} to="/mls/players" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'black', color: 'white' }}>Players</Button>
+              <Button component={Link} to="/mbl/home" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'black', color: 'white' }}>Home</Button>
+              <Button component={Link} to="/mbl/players" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'black', color: 'white' }}>Players</Button>
               {/* <Button component={Link} to="/mls/matches" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'purple', color: 'white' }}>Fixtures</Button> */}
-              <Button component={Link} to="/mls/results" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'black', color: 'white' }}>Results</Button>
-              <Button component={Link} to="/mls/standings" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'black', color: 'white' }}>Standings</Button>
-              <Button component={Link} to="/mls/stats" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'black', color: 'white' }}>Stats</Button>
-              <Button component={Link} to="/mls/transfers" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'black', color: 'white' }}>Transfers</Button>
-              <Button component={Link} to="/mls/news" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'black', color: 'white' }}>News</Button>
-              <Button component={Link} to="/mls/clubs" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'black', color: 'white' }}>Clubs</Button>
+              <Button component={Link} to="/mbl/results" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'black', color: 'white' }}>Results</Button>
+              <Button component={Link} to="/mbl/standings" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'black', color: 'white' }}>Standings</Button>
+              <Button component={Link} to="/mbl/stats" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'black', color: 'white' }}>Stats</Button>
+              <Button component={Link} to="/mbl/transfers" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'black', color: 'white' }}>Transfers</Button>
+              <Button component={Link} to="/mbl/news" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'black', color: 'white' }}>News</Button>
+              <Button component={Link} to="/mbl/clubs" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'black', color: 'white' }}>Clubs</Button>
             </Box>
           )}
         </Toolbar>
@@ -109,15 +109,15 @@ const Navbar = () => {
       {/* Drawer for Tablet and Small Screen Navigation */}
       <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer}>
         <List>
-          <ListItem button component={Link} to="/mls/home" onClick={toggleDrawer}><ListItemText primary="Home" /></ListItem>
-          <ListItem button component={Link} to="/mls/players" onClick={toggleDrawer}><ListItemText primary="Players" /></ListItem>
+          <ListItem button component={Link} to="/mbl/home" onClick={toggleDrawer}><ListItemText primary="Home" /></ListItem>
+          <ListItem button component={Link} to="/mbl/players" onClick={toggleDrawer}><ListItemText primary="Players" /></ListItem>
           {/* <ListItem button component={Link} to="/mls/matches" onClick={toggleDrawer}><ListItemText primary="Fixtures" /></ListItem> */}
-          <ListItem button component={Link} to="/mls/results" onClick={toggleDrawer}><ListItemText primary="Results" /></ListItem>
-          <ListItem button component={Link} to="/mls/standings" onClick={toggleDrawer}><ListItemText primary="Standings" /></ListItem>
-          <ListItem button component={Link} to="/mls/stats" onClick={toggleDrawer}><ListItemText primary="Stats" /></ListItem>
-          <ListItem button component={Link} to="/mls/transfers" onClick={toggleDrawer}><ListItemText primary="Transfers" /></ListItem>
-          <ListItem button component={Link} to="/mls/news" onClick={toggleDrawer}><ListItemText primary="News" /></ListItem>
-          <ListItem button component={Link} to="/mls/clubs" onClick={toggleDrawer}><ListItemText primary="Clubs" /></ListItem>
+          <ListItem button component={Link} to="/mbl/results" onClick={toggleDrawer}><ListItemText primary="Results" /></ListItem>
+          <ListItem button component={Link} to="/mbl/standings" onClick={toggleDrawer}><ListItemText primary="Standings" /></ListItem>
+          <ListItem button component={Link} to="/mbl/stats" onClick={toggleDrawer}><ListItemText primary="Stats" /></ListItem>
+          <ListItem button component={Link} to="/mbl/transfers" onClick={toggleDrawer}><ListItemText primary="Transfers" /></ListItem>
+          <ListItem button component={Link} to="/mbl/news" onClick={toggleDrawer}><ListItemText primary="News" /></ListItem>
+          <ListItem button component={Link} to="/mbl/clubs" onClick={toggleDrawer}><ListItemText primary="Clubs" /></ListItem>
           </List>
       </Drawer>
     </div>

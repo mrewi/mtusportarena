@@ -20,6 +20,9 @@ const PlayersManagement = () => {
     goals: 0,
     points: 0,
     assists: 0,
+    rebounds: 0,
+    steals: 0,
+    blocks: 0,
     appearances: 0,
     cleanSheets: 0,
     teamLogo: ''
@@ -56,6 +59,9 @@ const PlayersManagement = () => {
       goals: 0,
       points: 0,
       assists: 0,
+      rebounds: 0,
+      steals: 0,
+      blocks: 0,
       appearances: 0,
       cleanSheets: 0,
       teamLogo: ''
@@ -197,20 +203,38 @@ const PlayersManagement = () => {
             fullWidth
             margin="normal"
           />
-          {/* <TextField
-            label="Points"
-            name="goals"
-            type="number"
-            value={newPlayer.points}
-            onChange={handleChange}
-            fullWidth
-            margin="normal"
-          /> */}
           <TextField
             label="Assists"
             name="assists"
             type="number"
             value={newPlayer.assists}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+          />
+          <TextField
+            label="Rebounds"
+            name="rebounds"
+            type="number"
+            value={newPlayer.rebounds}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+          />
+          <TextField
+            label="Steals"
+            name="steals"
+            type="number"
+            value={newPlayer.steals}
+            onChange={handleChange}
+            fullWidth
+            margin="normal"
+          />
+          <TextField
+            label="Blocks"
+            name="blocks"
+            type="number"
+            value={newPlayer.blocks}
             onChange={handleChange}
             fullWidth
             margin="normal"

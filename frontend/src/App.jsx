@@ -29,6 +29,7 @@ import MLSAdminDashboard from './pages/MLS/Admin/MLSAdminDashboard'
 import PlayersManagement from './pages/MBL/Admin/Management/PlayersManagement'
 import MLSPlayersManagement from './pages/MLS/Admin/Management/MLSPlayersManagement'
 import MLSResultsManagement from './pages/MLS/Admin/Management/MLSResultsManagement'
+import ResultsManagement from './pages/MBL/Admin/Management/ResultsManagement'
 import FixturesManagement from './pages/MBL/Admin/Management/FixturesManagement'
 import MLSFixturesManagement from './pages/MLS/Admin/Management/MLSFixturesManagement'
 import MLSStandingsManagement from './pages/MLS/Admin/Management/MLSStandingsManagement'
@@ -138,12 +139,12 @@ const App = () => {
                 </MLSProtectedRoute>
               }
             />
-            {/* <Route path="/mbl/admin-dashboard" element={
-                <ProtectedRoute>
-                  <MBLAdminDashboard />
-                </ProtectedRoute>
+            <Route path="/mbl/admin-dashboard/results" element={
+                <MBLProtectedRoute>
+                  <ResultsManagement />
+                </MBLProtectedRoute>
               }
-            /> */}
+            />
             <Route path="/mls/admin-dashboard/stats" element={
                 <MLSProtectedRoute>
                   <MLSStatssManagement />

@@ -156,6 +156,9 @@ const Players = () => {
               <Typography variant="body1">Position: {selectedPlayer.position}</Typography>
               <Typography variant="body1">Points: {selectedPlayer.goals}</Typography>
               <Typography variant="body1">Assists: {selectedPlayer.assists}</Typography>
+              <Typography variant="body1">Rebounds: {selectedPlayer.rebounds}</Typography>
+              <Typography variant="body1">Steals: {selectedPlayer.steals}</Typography>
+              <Typography variant="body1">Blocks: {selectedPlayer.blocks}</Typography>
               {selectedPlayer.position === 'Goalkeeper' && (
                 <Typography variant="body1">Clean Sheets: {selectedPlayer.cleanSheets}</Typography>
               )}

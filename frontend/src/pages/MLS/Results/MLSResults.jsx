@@ -19,6 +19,11 @@ const Results = () => {
         const resultsSnapshot = await getDocs(resultsCollection);
         const resultsList = resultsSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
         setResults(resultsList);
+
+         // Sort results by gameWeek in descending order
+         resultsList.sort((a, b) => b.gameWeek - a.gameWeek);
+
+         setResults(resultsList);
       } catch (error) {
         setError('Failed to fetch results.');
       } finally {
@@ -28,6 +33,13 @@ const Results = () => {
 
     fetchResults();
   }, []);
+
+  const groupedResults = results.reduce((acc, result) => {
+    const { gameWeek } = result;
+    if (!acc[gameWeek]) acc[gameWeek] = [];
+    acc[gameWeek].push(result);
+    return acc;
+  }, {});
 
   const handleOpenModal = (result) => {
     setSelectedResult(result);
@@ -49,59 +61,64 @@ const Results = () => {
           <Typography color="error" variant="body1">{error}</Typography>
         </Box>
       ) : (
-        <>
-          <Box sx={{ textAlign: 'center', padding: 2 }}>
-            <Typography variant="h4" gutterBottom>Game Week 1</Typography>
-          </Box>
-          <Grid container spacing={3} justifyContent="center">
-            {results.map((result) => (
-              <Grid item xs={12} md={5} key={result.id}>
-                <Card
-                  sx={{
-                    padding: 2,
-                    width: '30rem',
-                    fontFamily: 'Roboto Mono, monospace',
-                    textAlign: 'center',
-                    cursor: 'pointer',
-                    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
-                    '&:hover': {
-                      boxShadow: '0 6px 18px rgba(0,0,0,0.15)',
-                    },
-                  }}
-                  onClick={() => handleOpenModal(result)}
-                >
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'space-between',
-                    }}
-                  >
-                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                      <CardMedia
-                        component="img"
-                        sx={{ width: 80, height: 80, objectFit: 'contain' }}
-                        image={result.teamALogo}
-                        alt={`${result.teamA} logo`}
-                      />
-                      <Typography variant="body1" sx={{ marginTop: 1 }}>{result.teamA}</Typography>
-                    </Box>
-                    <Typography variant="h6">{result.scoreA} - {result.scoreB}</Typography>
-                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                      <CardMedia
-                        component="img"
-                        sx={{ width: 80, height: 80, objectFit: 'contain' }}
-                        image={result.teamBLogo}
-                        alt={`${result.teamB} logo`}
-                      />
-                      <Typography variant="body1" sx={{ marginTop: 1 }}>{result.teamB}</Typography>
-                    </Box>
-                  </Box>
-                </Card>
+        <Box sx={{ padding: 2 }}>
+        {Object.keys(groupedResults)
+          .sort((a, b) => b - a) // Ensure descending order of game weeks
+          .map((gameWeek) => (
+            <Box key={gameWeek} sx={{ marginBottom: 4 }}>
+              <Typography variant="h4" textAlign="center" gutterBottom>
+                Game Week {gameWeek}
+              </Typography>
+              <Grid container spacing={3} justifyContent="center">
+                {groupedResults[gameWeek].map((result) => (
+                  <Grid item xs={12} md={5} key={result.id}>
+                    <Card
+                      sx={{
+                        padding: 2,
+                        width: '30rem',
+                        fontFamily: 'Roboto Mono, monospace',
+                        textAlign: 'center',
+                        cursor: 'pointer',
+                        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+                        '&:hover': {
+                          boxShadow: '0 6px 18px rgba(0,0,0,0.15)',
+                        },
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                        }}
+                      >
+                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                          <CardMedia
+                            component="img"
+                            sx={{ width: 80, height: 80, objectFit: 'contain' }}
+                            image={result.teamALogo}
+                            alt={`${result.teamA} logo`}
+                          />
+                          <Typography variant="body1" sx={{ marginTop: 1 }}>{result.teamA}</Typography>
+                        </Box>
+                        <Typography variant="h6">{result.scoreA} - {result.scoreB}</Typography>
+                        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                          <CardMedia
+                            component="img"
+                            sx={{ width: 80, height: 80, objectFit: 'contain' }}
+                            image={result.teamBLogo}
+                            alt={`${result.teamB} logo`}
+                          />
+                          <Typography variant="body1" sx={{ marginTop: 1 }}>{result.teamB}</Typography>
+                        </Box>
+                      </Box>
+                    </Card>
+                  </Grid>
+                ))}
               </Grid>
-            ))}
-          </Grid>
-        </>
+            </Box>
+          ))}
+      </Box>
       )}
       <Modal
         open={!!selectedResult}

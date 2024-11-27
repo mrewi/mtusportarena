@@ -50,7 +50,7 @@ const Navbar = () => {
           </Box>
           {/* Admin Button on the right */}
           <Box sx={{ position: 'absolute', right: 0 }}>
-            <Button component={Link} to="/mls/admin-auth" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'grey', color: 'white', fontSize: '20px' }}>
+            <Button component={Link} to="/mbl/admin-auth" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'grey', color: 'white', fontSize: '20px' }}>
               ADMIN
             </Button>
           </Box>

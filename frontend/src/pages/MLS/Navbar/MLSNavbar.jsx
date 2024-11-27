@@ -104,7 +104,7 @@ const Navbar = () => {
               <Button component={Link} to="/mls/results" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'purple', color: 'white' }}>Results</Button>
               <Button component={Link} to="/mls/standings" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'purple', color: 'white' }}>Standings</Button>
               <Button component={Link} to="/mls/stats" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'purple', color: 'white' }}>Stats</Button>
-              <Button component={Link} to="/mls/transfers" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'purple', color: 'white' }}>Transfers</Button>
+              {/* <Button component={Link} to="/mls/transfers" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'purple', color: 'white' }}>Transfers</Button> */}
               <Button component={Link} to="/mls/news" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'purple', color: 'white' }}>News</Button>
               <Button component={Link} to="/mls/clubs" sx={{ fontFamily: 'Roboto Mono, monospace', backgroundColor: 'purple', color: 'white' }}>Clubs</Button>
             </Box>
@@ -121,7 +121,7 @@ const Navbar = () => {
           <ListItem button component={Link} to="/mls/results" onClick={toggleDrawer}><ListItemText primary="Results" /></ListItem>
           <ListItem button component={Link} to="/mls/standings" onClick={toggleDrawer}><ListItemText primary="Standings" /></ListItem>
           <ListItem button component={Link} to="/mls/stats" onClick={toggleDrawer}><ListItemText primary="Stats" /></ListItem>
-          <ListItem button component={Link} to="/mls/transfers" onClick={toggleDrawer}><ListItemText primary="Transfers" /></ListItem>
+          {/* <ListItem button component={Link} to="/mls/transfers" onClick={toggleDrawer}><ListItemText primary="Transfers" /></ListItem> */}
           <ListItem button component={Link} to="/mls/news" onClick={toggleDrawer}><ListItemText primary="News" /></ListItem>
           <ListItem button component={Link} to="/mls/clubs" onClick={toggleDrawer}><ListItemText primary="Clubs" /></ListItem>
           </List>

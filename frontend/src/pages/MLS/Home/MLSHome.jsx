@@ -6,12 +6,12 @@ import FootballMedia3 from '../assets/football home media 3.jpg';
 import FootballMedia4 from '../assets/football home media 4.jpg';
 import FootballMedia5 from '../assets/football home media 5.jpg';
 import FootballMedia6 from '../assets/main media 17.jpg';
-import FaceOfTheWeek from '../Club/YoungStars/YoungStars.png';
+import FaceOfTheWeek from '../Club/AdeshinaFc/AdeshinaFc.png';
 import PlayerOfTheWeek from '../assets/zino.png';
-import CoachOfTheWeek from '../assets/danilo.png';
-import GloveOfTheWeek from '../Club/YoungStars/YoungStars.png';
-import RookieOfTheWeek from '../Club/OjoEagles/OjoEagles.png';
-import TeamOfTheWeek1 from '../assets/teamof the week1.png';
+import CoachOfTheWeek from '../assets/coachseyi.png';
+import GloveOfTheWeek from '../assets/cabaman-removebg-preview.png';
+import RookieOfTheWeek from '../Club/AdeshinaFc/AdeshinaFc.png';
+import TeamOfTheWeek1 from '../assets/teamof the week2.png';
 import FootballMediaHighlight1 from '../assets/football highlight 1 home.jpg';
 import FootballMediaHighlight2 from '../assets/football highlight 2 home.jpg';
 import FootballMediaHighlight3 from '../assets/football highlight 3 home.jpg';
@@ -34,10 +34,10 @@ const Home = () => {
 
   const playerImages = [
     { image: PlayerOfTheWeek, label: "Player of the Week: Zino" },
-    { image: CoachOfTheWeek, label: "Coach of the Week: Danilo" },
-    { image: RookieOfTheWeek, label: "Rookie of the Week: Banks" },
-    { image: GloveOfTheWeek, label: "Glove of the Week: Pickford" },
-    { image: FaceOfTheWeek, label: "Face of the Week: Soto" }
+    { image: CoachOfTheWeek, label: "Coach of the Week: Seyi" },
+    { image: RookieOfTheWeek, label: "Rookie of the Week: Ebenezer" },
+    { image: GloveOfTheWeek, label: "Glove of the Week: Cabaman" },
+    { image: FaceOfTheWeek, label: "Face of the Week: Efe" }
   ];
   const teamOfTheWeekImage = TeamOfTheWeek1;
 
@@ -112,7 +112,7 @@ const Home = () => {
             width: { xs: '90%', sm: '80%', md: '60%' },  // Responsive width
           }}
         >
-          <Typography variant="h6" sx={{ mb: 2 }}>Game Week 2 Awards</Typography>
+          <Typography variant="h6" sx={{ mb: 2 }}>Game Week 3 Awards</Typography>
           <Grid container spacing={2}>
             {playerImages.map((item, index) => (
               <Grid item xs={12} sm={6} md={4} key={index}>

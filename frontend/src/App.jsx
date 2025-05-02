@@ -4,6 +4,13 @@ import './index.css'
 import { BrowserRouter as Router, Route, Routes, } from 'react-router-dom'
 // import { AppBar, Toolbar, Typography, Box, Button } from '@mui/material'
 import Home from './pages/Home'
+import SWFHome from './pages/SWF/home/SWFHome'
+import SWFClub from './pages/SWF/Club/SWFClub'
+import SWFNews from './pages/SWF/News/SWFNews'
+import SWFPlayers from './pages/SWF/Players/SWFPlayers'
+import SWFResults from './pages/SWF/Results/SWFResults'
+import SWFStandings from './pages/SWF/Standings/SWFStandings'
+import SWFStats from './pages/SWF/Stats/SWFStats'
 import MLSHome from './pages/MLS/Home/MLSHome'
 import MBLHome from './pages/MBL/Home/MBLHome'
 import MLSPlayers from './pages/MLS/Players/MLSPlayers'
@@ -66,6 +73,15 @@ const App = () => {
           <Route path="/mls/transfers" element={<MLSTransfers />} />
           <Route path="/mls/news" element={<MLSNews />} />
           <Route path="/mls/clubs" element={<MLSClubs />} />
+
+          {/* student week football routing */}
+          <Route path="/student-week-football/home" element={<SWFHome />} />
+          <Route path="/student-week-football/club" element={<SWFClub />} />
+          <Route path="/student-week-football/news" element={<SWFNews />} />
+          <Route path="/student-week-football/players" element={<SWFPlayers />} />
+          <Route path="/student-week-football/results" element={<SWFResults />} />
+          <Route path="/student-week-football/standings" element={<SWFStandings />} />
+          <Route path="/student-week-football/stats" element={<SWFStats />} />
 
           {/* mbl routing */}
           <Route path="/mbl/home" element={<MBLHome />} />

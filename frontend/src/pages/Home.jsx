@@ -1,7 +1,7 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar/Navbar';
-import { Box, Typography, Grid, Card, CardMedia } from '@mui/material';
+import { Box, Typography, Card, CardMedia } from '@mui/material';
 import image1 from '../assets/main media 1.jpg';
 import image2 from '../assets/main media 2.jpg';
 import image3 from '../assets/main media 3.jpg';
@@ -22,79 +22,119 @@ import image17 from '../assets/main media 17.jpg';
 import image18 from '../assets/main media 18.jpg';
 import image19 from '../assets/main media 19.jpg';
 import image20 from '../assets/main media 20.jpg';
-// Import additional images similarly...
 
-// Array of imported images for the cards
-const imageArray = [image1, image2, image3, image4, image5, image6,image7,image8,image9,image10,image11,image12,image13,image14,image15,image16,image17,image18,image19,image20 /*, add more imports here*/];
+const imageArray = [
+  image1, image2, image3, image4, image5, image6,
+  image7, image8, image9, image10, image11, image12,
+  image13, image14, image15, image16, image17, image18,
+  image19, image20
+];
 
-// Generate random interval times between 2 and 5 seconds for each card
 const intervalTimes = imageArray.map(() => Math.floor(Math.random() * 3000) + 2000);
+
+const textSlides = [
+  'Welcome to MTU Sports Arena – where champions are made.',
+  'Train hard, play harder. Excellence through sports.',
+  'Student Week is coming — Get Ready!',
+  'Convo Week Tournaments – It’s not just a game.',
+  'We rise by lifting others — both on and off the field.',
+  'Join a team. Join a legacy. #MTUFamily'
+];
 
 const Home = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(Array(20).fill(0));
+  const [mainImageIndex, setMainImageIndex] = useState(0);
+  const [currentTextIndex, setCurrentTextIndex] = useState(0);
 
-  // Change images for each card independently at varying intervals
+  // Main slideshow and text slides
+  useEffect(() => {
+    const imgInterval = setInterval(() => {
+      setMainImageIndex((prev) => (prev + 1) % imageArray.length);
+    }, 4000);
+
+    const textInterval = setInterval(() => {
+      setCurrentTextIndex((prev) => (prev + 1) % textSlides.length);
+    }, 5000);
+
+    return () => {
+      clearInterval(imgInterval);
+      clearInterval(textInterval);
+    };
+  }, []);
+
+  // Grid of changing images
   useEffect(() => {
     const intervals = currentImageIndex.map((_, i) =>
       setInterval(() => {
         setCurrentImageIndex((prev) => {
           const newIndexes = [...prev];
-          newIndexes[i] = (newIndexes[i] + 1) % imageArray.length; // Cycle through images
+          newIndexes[i] = (newIndexes[i] + 1) % imageArray.length;
           return newIndexes;
         });
       }, intervalTimes[i])
     );
-    return () => intervals.forEach(clearInterval); // Cleanup intervals on component unmount
+
+    return () => {
+      intervals.forEach(clearInterval);
+    };
   }, []);
 
   return (
     <div>
       <Navbar />
+
+      {/* Slideshow + Text Row */}
       <Box
         sx={{
           display: 'flex',
-          flexDirection: 'column',
+          flexDirection: { xs: 'column', md: 'row' },
           alignItems: 'center',
+          justifyContent: 'center',
           textAlign: 'center',
           p: 3,
           backgroundColor: '#f5f5f5',
-          minHeight: '100vh',
+          minHeight: '80vh',
+          gap: 4,
         }}
       >
-        {/* Scrolling Text with Logo */}
-        <Box sx={{ display: 'flex', alignItems: 'center', overflow: 'hidden', whiteSpace: 'nowrap', mb: 4 }}>
-          {/* <MTUSPORTSARENALOGO sx={{ fontSize: 60, color: 'blue', mr: 2 }} /> */}
-          <Typography
-            variant="h4"
-            sx={{
-              display: 'inline-block',
-              fontWeight: 'bold',
-              fontFamily: 'monospace',
-              animation: 'scrollText 15s linear infinite',
-            }}
-          >
-            Welcome to MTU SPORTS ARENA
-          </Typography>
+        {/* Slideshow Left */}
+        <Box sx={{ flex: 1, maxWidth: 800 }}>
+          <Card>
+            <CardMedia
+              component="img"
+              image={imageArray[mainImageIndex]}
+              alt="Main Slideshow"
+              sx={{ height: { xs: 200, md: 400 }, objectFit: 'cover' }}
+            />
+          </Card>
         </Box>
 
-        {/* 20 Animated Image Cards */}
-        <Grid container spacing={2} sx={{ maxWidth: 1200 }}>
-          {Array.from({ length: 20 }).map((_, index) => (
-            <Grid item xs={12} sm={6} md={3} key={index}>
-              <Card>
-                <CardMedia
-                  component="img"
-                  image={imageArray[currentImageIndex[index]]}
-                  alt={`Image ${index + 1}`}
-                  sx={{ height: 150 }}
-                />
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
+        {/* Text Slide Right */}
+        <Box sx={{ flex: 1, maxWidth: 500 }}>
+          <Typography variant="h5" sx={{ fontFamily: 'monospace', mb: 2 }}>
+            {textSlides[currentTextIndex]}
+          </Typography>
+        </Box>
       </Box>
 
-      {/* CSS for Scrolling Text Animation */}
+      {/* Optional: Animated Grid of Thumbnails (if still needed)
+      <Grid container spacing={2} sx={{ maxWidth: 1200, margin: 'auto' }}>
+        {Array.from({ length: 20 }).map((_, index) => (
+          <Grid item xs={12} sm={6} md={3} key={index}>
+            <Card>
+              <CardMedia
+                component="img"
+                image={imageArray[currentImageIndex[index]]}
+                alt={`Image ${index + 1}`}
+                sx={{ height: 150 }}
+              />
+            </Card>
+          </Grid>
+        ))}
+      </Grid>
+      */}
+
+      {/* Optional: CSS scroll text (if needed elsewhere) */}
       <style>
         {`
           @keyframes scrollText {

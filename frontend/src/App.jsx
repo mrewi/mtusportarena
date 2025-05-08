@@ -30,20 +30,24 @@ import MBLTransfers from './pages/MBL/Transfers/MBLTransfers'
 import MLSClubs from './pages/MLS/Club/MLSClubs'
 import MBLClubs from './pages/MBL/Clubs/MBLClubs'
 import MLSAdminSignin from './pages/MLS/Admin/MLSAdminSignin'
+import SWFAdminSignin from './pages/SWF/Admin/SWFAdminSignin'
 import MBLAdminSignin from './pages/MBL/Admin/MBLAdminSignin'
 import MBLAdminDashboard from './pages/MBL/Admin/MBLAdminDashboard'
 import MLSAdminDashboard from './pages/MLS/Admin/MLSAdminDashboard'
+import SWFAdminDashboard from './pages/SWF/Admin/SWFAdminDashboard'
 import PlayersManagement from './pages/MBL/Admin/Management/PlayersManagement'
 import MLSPlayersManagement from './pages/MLS/Admin/Management/MLSPlayersManagement'
 import MLSResultsManagement from './pages/MLS/Admin/Management/MLSResultsManagement'
 import ResultsManagement from './pages/MBL/Admin/Management/ResultsManagement'
 import FixturesManagement from './pages/MBL/Admin/Management/FixturesManagement'
 import MLSFixturesManagement from './pages/MLS/Admin/Management/MLSFixturesManagement'
+import SWFFixturesManagement from './pages/SWF/Admin/Management/SWFFixturesManagement'
 import MLSStandingsManagement from './pages/MLS/Admin/Management/MLSStandingsManagement'
 import StandingsManagement from './pages/MBL/Admin/Management/StandingsManagement'
 import MLSStatssManagement from './pages/MLS/Admin/Management/MLSStatsManagement'
 import MBLProtectedRoute from './pages/MBL//Admin/MBLProctectedRoute'
 import MLSProtectedRoute from './pages/MLS/Admin/MLSProtectedRoute'
+import SWFProtectedRoute from './pages/SWF/Admin/SWFProtectedRoute'
 
 // import Navbar from './components/Navbar/Navbar'
 
@@ -95,9 +99,9 @@ const App = () => {
           <Route path="/mbl/clubs" element={<MBLClubs />} />
 
           {/* admin auth */}
-          <Route path="/admin-auth" element={<MLSAdminSignin />} />
           <Route path="/mbl/admin-auth" element={<MBLAdminSignin />} />
           <Route path="/mls/admin-auth" element={<MLSAdminSignin />} />
+          <Route path="/student-week-football/admin-auth" element={<SWFAdminSignin />} />
 
           {/* admin dashboard */}
            {/* Protected Route for admin dashboard */}
@@ -166,7 +170,22 @@ const App = () => {
                   <MLSStatssManagement />
                 </MLSProtectedRoute>
               }
-            />
+             />
+            
+            
+            
+            <Route path="/student-week-football/admin-dashboard/" element={
+                <SWFProtectedRoute>
+                  <SWFAdminDashboard />
+                </SWFProtectedRoute>
+              }
+             />
+            <Route path="/student-week-football/admin-dashboard/fixtures" element={
+                <SWFProtectedRoute>
+                  <SWFFixturesManagement />
+                </SWFProtectedRoute>
+              }
+             />
             {/* <Route path="/mbl/admin-dashboard" element={
                 <ProtectedRoute>
                   <MBLAdminDashboard />
@@ -179,10 +198,6 @@ const App = () => {
                 </ProtectedRoute>
               }
             /> */}
-
-          
-          {/* <Route path="/sign-in" element={<SignIn />} /> */}
-          {/* <Route path="/register" element={<Register />} /> */}
 
         </Routes>
       </div>
